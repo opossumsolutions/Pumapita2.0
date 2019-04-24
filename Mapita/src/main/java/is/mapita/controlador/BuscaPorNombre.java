@@ -25,7 +25,6 @@ public class BuscaPorNombre {
     private String nombre;
     private List<Usuario> resultado;
     private List<Usuario> eliminados;
-
     
     public void setResultado(List<Usuario> resultado) {
         this.resultado = resultado;
@@ -53,20 +52,18 @@ public class BuscaPorNombre {
         return "resultado?faces-redirect=true";
     }
     
-    public String eliminar(){
+    public String eliminarUsuarios(){
         UsuarioDAO udb = new UsuarioDAO();
         for(Usuario r : resultado){
             if(r.isSelected()){
-                eliminados.add(r);
+                //eliminados.add(r);
+                System.out.println(""+r.getNombre());
+                udb.delete(r);
             }
         }
-        if(!eliminados.isEmpty()){
-            for(Usuario e : eliminados){
-                e=udb.buscaPorCorreo(e.getCorreo());
-                udb.delete(e);
-            }
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("eliminados"));
-        }
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("eliminados"));
+        UsuarioDAO ubd = new UsuarioDAO();
+        resultado =  ubd.buscaPorNombre(nombre);
         return "resultado?faces-redirect=true";
     }
 }

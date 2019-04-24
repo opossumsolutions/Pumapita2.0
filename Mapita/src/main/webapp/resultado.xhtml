@@ -20,6 +20,7 @@ and open the template in the editor.
         </h:head>
         <h:body>
             <h:form id="form">
+                <p:growl id="mssg"/>
                 <p:dataTable value="#{buscaPorNombre.resultado}" var="resultado" paginator="true" paginatorPosition="bottom" rows="15">
                     <p:column>
                         <h:selectBooleanCheckbox value="#{resultado.selected}" />
@@ -31,6 +32,15 @@ and open the template in the editor.
                         <h:outputText value="#{resultado.correo}"/>
                     </p:column>
                 </p:dataTable>
+                <br/>
+                <p:commandButton value="Eliminar" actionListener="#{buscaPorNombre.eliminarUsuarios()}" update="form" icon="ui-icon-trash">
+                    <p:confirm message="¿Seguro que quieres eliminar?" header="Aviso" icon="ui-icon-alert"/>
+                </p:commandButton>
+                
+                <p:confirmDialog global="true">
+                    <p:commandButton value="Si" type="button" icon="ui-icon-check" styleClass="ui-confirmdialog-yes"/>
+                    <p:commandButton value="No" type="button" icon="ui-icon-close" styleClass="ui-confirmdialog-no"/>
+                </p:confirmDialog>
             </h:form>            
         </h:body>
         <footer>

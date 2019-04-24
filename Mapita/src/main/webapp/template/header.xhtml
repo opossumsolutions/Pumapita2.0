@@ -35,7 +35,6 @@ and open the template in the editor.
                                     <p:graphicImage name="/images/login.png" width="50">
                                     </p:graphicImage>
                                 </h:outputLink>
-                                <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
                                 <p:dialog header="Inicio Sesion" widgetVar="dlg" resizable="false">
                                     <h:panelGrid columns="2" cellpadding="5">
                                             <h:form id="login">
@@ -64,13 +63,10 @@ and open the template in the editor.
                                 <p:graphicImage name="/images/registro.png" width="45">
                                 </p:graphicImage>
                             </h:outputLink>
-
-                            <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
-
                             <p:dialog header="Registro" widgetVar="dlg2" resizable="false">
                                 <h:panelGrid columns="2" cellpadding="5">
                                     <h:form rendered="#{empty user}" id="form" class="formulario">
-                                        <p:messages id="messages" showDetail="true" closable="true">
+                                        <p:messages id="messages" closable="true">
                                             <p:autoUpdate />
                                         </p:messages>
                                         <h:panelGrid columns="3" cellpadding="5">
@@ -92,8 +88,8 @@ and open the template in the editor.
                                             <p:outputLabel for="contr" value="Confirma:" />
                                             <p:password class="texto" id="contr" value="#{agregaUsuario.contrasenia}" placeholder="Confirma" required="true"/> <br/>
                                             <p:outputLabel for="fechanacimiento" value="Fecha de Nacimiento:" />
-                                            <p:calendar class="texto" id="fechanacimiento" value="#{agregaUsuario.fechanacimiento}" required="true" placeholder="Fecha de nacimiento" requiredMessage="Por favor ingresa tu nombre"  /> <br/>
-                                            <p:commandButton class="texto" action="#{agregaUsuario.agregaUsuario()}" value="enviar"/>
+                                            <p:calendar class="texto" id="fechanacimiento" value="#{agregaUsuario.fechanacimiento}" required="true" placeholder="Fecha de nacimiento" requiredMessage="Por favor ingresa tu fecha de nacimiento"  /> <br/>
+                                            <p:commandButton action="#{agregaUsuario.agregaUsuario()}" value="enviar"/>
                                         </h:panelGrid>
                                     </h:form>
                                 </h:panelGrid>

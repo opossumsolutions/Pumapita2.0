@@ -7,6 +7,8 @@ package is.mapita.controlador;
 
 import is.mapita.modelo.Usuario;
 import is.mapita.modelo.UsuarioDAO;
+import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -20,6 +22,25 @@ import javax.faces.context.FacesContext;
 public class EditaUsuario {
     private String nombre;
     private String contrasenia;
+    private List<Usuario> resultado;
+    private List<Usuario> eliminados;
+
+    public List<Usuario> getResultado() {
+        return resultado;
+    }
+
+    public void setResultado(List<Usuario> resultado) {
+        this.resultado = resultado;
+    }
+
+    public List<Usuario> getEliminados() {
+        return eliminados;
+    }
+
+    public void setEliminados(List<Usuario> eliminados) {
+        this.eliminados = eliminados;
+    }
+    
 
     public String getNombre() {
         return nombre;
@@ -69,4 +90,5 @@ public class EditaUsuario {
         Usuario u = udb.buscaPorCorreo(correo);
         udb.delete(u);
     }
+    
 }
