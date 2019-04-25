@@ -8,7 +8,6 @@ package is.mapita.controlador;
 import is.mapita.modelo.Usuario;
 import is.mapita.modelo.UsuarioDAO;
 import java.util.List;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -22,8 +21,17 @@ import javax.faces.context.FacesContext;
 public class EditaUsuario {
     private String nombre;
     private String contrasenia;
+    private String correo;
     private List<Usuario> resultado;
     private List<Usuario> eliminados;
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
 
     public List<Usuario> getResultado() {
         return resultado;
@@ -72,6 +80,17 @@ public class EditaUsuario {
         ControladorSesion.UserLogged us= (ControladorSesion.UserLogged) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
         Usuario u = udb.buscaPorCorreo(us.getCorreo());
         u.setContrasenia(contrasenia);
+        udb.update(u);
+        return "/comentarista/perfil?faces-redirect=true";
+    }
+    
+    public String editaUsuario(){
+        UsuarioDAO udb = new UsuarioDAO();
+        ControladorSesion.UserLogged us= (ControladorSesion.UserLogged) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        Usuario u = udb.buscaPorCorreo(us.getCorreo());
+        u.setContrasenia(contrasenia);
+        u.setNombre(nombre);
+        u.setCorreo(correo);
         udb.update(u);
         return "/comentarista/perfil?faces-redirect=true";
     }

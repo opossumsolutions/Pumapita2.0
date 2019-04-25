@@ -56,12 +56,9 @@ public class BuscaPorNombre {
         UsuarioDAO udb = new UsuarioDAO();
         for(Usuario r : resultado){
             if(r.isSelected()){
-                //eliminados.add(r);
-                System.out.println(""+r.getNombre());
                 udb.delete(r);
             }
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("eliminados"));
         UsuarioDAO ubd = new UsuarioDAO();
         resultado =  ubd.buscaPorNombre(nombre);
         return "resultado?faces-redirect=true";

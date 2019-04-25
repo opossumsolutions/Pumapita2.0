@@ -25,7 +25,7 @@ and open the template in the editor.
                         <h:form id="busqueda">
                             <p:message for="search"/>
                             <p:inputText type="search" id="search" value="#{buscaPorNombre.nombre}" required="true" requiredMessage="No hay personas sin nombre"/>
-                            <p:commandButton action="#{buscaPorNombre.buscaPorNombre()}" value="BuscaPorNombre" update="busqueda"/>          
+                            <p:commandButton action="#{buscaPorNombre.buscaPorNombre()}" styleClass = "myButton" value="Busca" update="busqueda"/>          
                         </h:form>
                     </div>
                     <div class="ui-g-1">
@@ -48,69 +48,88 @@ and open the template in the editor.
                                                     <p:outputLabel for="password" value="Contraseña:" />
                                                     <p:password class="texto" id="password" value="#{controladorSesion.contrasenia}" placeholder="Contrasenia"  required="true" requiredMessage="Por favor ingresa tu contrasenia"/>
                                                     <p:message for="password"/>
-                                                    <p:commandButton class="texto" action="#{controladorSesion.login()}" value="enviar" update="login" />
+                                                    <p:commandButton class="texto" action="#{controladorSesion.login()}" value="Iniciar" update="login" />
                                                 </h:panelGrid>
                                             </h:form>  
                                     </h:panelGrid>
                                 </p:dialog>    
                             </h:form>
                         </c:if>
+                        <c:if test="#{not empty user}">
+                            <h:form>
+                                <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="logout">
+                                    <p:graphicImage name="/images/logout.png" width="50">
+                                    </p:graphicImage>
+                                </h:outputLink>
+                                <p:dialog header="Cerrar Sesion" widgetVar="dlg" resizable="false">
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                            <h:form id="logout">
+                                                <h:panelGrid columns="3" cellpadding="5">
+                                                    <p:commandButton class="texto" action="#{controladorSesion.logout()}" value="Si" update="logout" />
+                                                    <p:commandButton value="No" onclick="PF('dlg').hide();$('#form').trigger('reset');" type="button" />
+                                                </h:panelGrid>
+                                            </h:form>  
+                                    </h:panelGrid>
+                                </p:dialog> 
+                            </h:form>
+                        </c:if>
                     </div>
                     <div class="ui-g-1">
                         <c:if test="#{ empty user}">
-                        <h:form>        
-                            <h:outputLink value="javascript:void(0)" onclick="PF('dlg2').show();" title="login">
-                                <p:graphicImage name="/images/registro.png" width="45">
-                                </p:graphicImage>
-                            </h:outputLink>
-                            <p:dialog header="Registro" widgetVar="dlg2" resizable="false">
-                                <h:panelGrid columns="2" cellpadding="5">
-                                    <h:form rendered="#{empty user}" id="form" class="formulario">
-                                        <p:messages id="messages" closable="true">
-                                            <p:autoUpdate />
-                                        </p:messages>
-                                        <h:panelGrid columns="3" cellpadding="5">
-                                            <p:outputLabel for="nombre" value="Nombre:" />
-                                            <p:inputText  class="texto" id="nombre" value="#{agregaUsuario.nombre}" required="true" placeholder="Nombre"  validatorMessage="Por favor ingresa tu nombre" requiredMessage="Por favor ingresa tu nombre"/> <br/>
-                                            <p:outputLabel for="correo" value="Correo:" />
-                                            <p:inputText class="texto" id="correo" value="#{agregaUsuario.correo}" required="true" placeholder="Correo" validatorMessage="Debe ser un correo valido"> 
-                                                <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
-                                                <p:keyFilter regEx="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
-                                            </p:inputText> <br/>
-                                            <p:outputLabel for="rol" value="Rol:"/>
-                                            <p:selectOneMenu id="rol" value="#{agregaUsuario.rol}" style="width:125px">
-                                                <f:selectItem itemLabel="Comentarista" itemValue="comentarista" />
-                                                <f:selectItem itemLabel="Informador" itemValue="informador" />
-                                                <f:selectItem itemLabel="Administrador" itemValue="administrador" />
-                                            </p:selectOneMenu><br/>
-                                            <p:outputLabel for="contrasenia" value="Contraseña:" />
-                                            <p:password class="texto" id="contrasenia" value="#{agregaUsuario.contrasenia}" placeholder="Contrasenia" match="contr" required="true" validatorMessage="No coinciden las contrasenias"/> <br/>
-                                            <p:outputLabel for="contr" value="Confirma:" />
-                                            <p:password class="texto" id="contr" value="#{agregaUsuario.contrasenia}" placeholder="Confirma" required="true"/> <br/>
-                                            <p:outputLabel for="fechanacimiento" value="Fecha de Nacimiento:" />
-                                            <p:calendar class="texto" id="fechanacimiento" value="#{agregaUsuario.fechanacimiento}" required="true" placeholder="Fecha de nacimiento" requiredMessage="Por favor ingresa tu fecha de nacimiento"  /> <br/>
-                                            <p:commandButton action="#{agregaUsuario.agregaUsuario()}" value="enviar"/>
-                                        </h:panelGrid>
-                                    </h:form>
-                                </h:panelGrid>
-                            </p:dialog>    
-                        </h:form>
+                            <h:form>        
+                                <h:outputLink value="javascript:void(0)" onclick="PF('dlg2').show();" title="login">
+                                    <p:graphicImage name="/images/registro.png" width="45">
+                                    </p:graphicImage>
+                                </h:outputLink>
+                                <p:dialog header="Registro" widgetVar="dlg2" resizable="false">
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <h:form id="form" class="formulario">
+                                            <p:messages id="message" closable="true">
+                                                <p:autoUpdate />
+                                            </p:messages>
+                                            <h:panelGrid columns="3" cellpadding="5">
+                                                <p:outputLabel for="nombre" value="Nombre:" />
+                                                <p:inputText  class="texto" id="nombre" value="#{agregaUsuario.nombre}" required="true" placeholder="Nombre"  validatorMessage="Por favor ingresa tu nombre" requiredMessage="Por favor ingresa tu nombre"/> <br/>
+                                                <p:outputLabel for="correo" value="Correo:" />
+                                                <p:inputText class="texto" id="correo" value="#{agregaUsuario.correo}" required="true" placeholder="Correo" validatorMessage="Debe ser un correo valido"> 
+                                                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                                    <p:keyFilter regEx="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                                                </p:inputText> <br/>
+                                                <p:outputLabel for="rol" value="Rol:"/>
+                                                <p:selectOneMenu id="rol" value="#{agregaUsuario.rol}" style="width:125px">
+                                                    <f:selectItem itemLabel="Comentarista" itemValue="comentarista" />
+                                                    <f:selectItem itemLabel="Informador" itemValue="informador" />
+                                                    <f:selectItem itemLabel="Administrador" itemValue="administrador" />
+                                                </p:selectOneMenu><br/>
+                                                <p:outputLabel for="contrasenia" value="Contraseña:" />
+                                                <p:password class="texto" id="contrasenia" value="#{agregaUsuario.contrasenia}" placeholder="Contrasenia" match="contr" required="true" validatorMessage="No coinciden las contrasenias"/> <br/>
+                                                <p:outputLabel for="contr" value="Confirma:" />
+                                                <p:password class="texto" id="contr" value="#{agregaUsuario.contrasenia}" placeholder="Confirma" required="true"/> <br/>
+                                                <p:outputLabel for="fechanacimiento" value="Fecha de Nacimiento:" />
+                                                <p:calendar class="texto" id="fechanacimiento" value="#{agregaUsuario.fechanacimiento}" required="true" placeholder="Fecha de nacimiento" requiredMessage="Por favor ingresa tu fecha de nacimiento"  /> <br/>
+                                                <p:commandButton action="#{agregaUsuario.agregaUsuario()}" value="enviar"/>
+                                            </h:panelGrid>
+                                        </h:form>
+                                    </h:panelGrid>
+                                </p:dialog>    
+                            </h:form>
+                        </c:if>
+                        <c:if test="#{not empty user}">
+                            <h:form>
+                                <c:if test="#{user.rol eq 'COMENTARISTA'}">
+                                    <p:link outcome="/comentarista/perfil.xhtml"   ><p:graphicImage name="/images/perfil.png" width="50"/></p:link>
+                                </c:if>
+                                <c:if test="#{user.rol eq 'INFORMADOR'}">
+                                    <p:link outcome="/informador/perfil.xhtml" ><p:graphicImage name="/images/perfil.png" width="50"/></p:link>
+                                </c:if>
+                                <c:if test="#{user.rol eq 'ADMINISTRADOR'}">
+                                    <p:link outcome="/administrador/perfil.xhtml" ><p:graphicImage name="/images/perfil.png" width="50"/></p:link>
+                                </c:if>
+                            </h:form>
                         </c:if>
                     </div>
                 </div>
             </div>
-            <nav>
-                <p:link outcome="/comentarista/perfil.xhtml"  rendered="#{user.rol eq 'COMENTARISTA'}" ><h2>Perfil</h2></p:link>
-                <p:link outcome="/informador/perfil.xhtml"  rendered="#{user.rol eq 'INFORMADOR'}" ><h2>Perfil</h2></p:link>
-                <p:link outcome="/administrador/perfil.xhtml"  rendered="#{user.rol eq 'ADMINISTRADOR'}" ><h2>Perfil</h2></p:link>
-                <h:form id="logout" rendered="#{not empty user}">
-                    <p:commandButton action="#{controladorSesion.logout()}" value="logout"/>
-                </h:form>
-                <h:form>
-                     <p:commandButton action="/administrador/perfil.xhtml" value="Perfil" rendered="{user.rol eq 'ADMINISTRADOR'}"/>
-                </h:form>
-            </nav>
-
         </ui:composition>
     </body>
 </html>

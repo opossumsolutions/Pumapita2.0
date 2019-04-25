@@ -20,33 +20,6 @@
 		</ui:insert>
                 
             </header>
-            <div>
-                <section>
-                    
-                    <h2>
-                        <c:if test="#{ empty user}">
-                            Registrate
-                        </c:if>
-                        <c:if test="#{not empty user}">
-                            #{user.nombre}
-                        </c:if>
-                    </h2>
-                </section>
-               
-                <aside>
-                    
-                    
-                    
-                    
-                    <br/>
-                    <p:separator />
-                    <br/>
-                    <p:link outcome="/comentarista/perfil" value="Ver Perfil" rendered="#{not empty user and user.rol eq 'COMENTARISTA'}"/> <br/>
-                    <p:link outcome="/informador/perfil" value="Ver Perfil" rendered="#{not empty user and user.rol eq 'INFORMADOR'}"/> <br/>
-                    <p:link outcome="/administrador/perfil" value="Ver Perfil" rendered="#{not empty user and user.rol eq 'ADMINISTRADOR'}"/><br/>
-                    <p:link outcome="/administrador/eliminarMarcadores" value="Elimina Marcadores" rendered="#{not empty user and user.rol eq 'ADMINISTRADOR'}"/><br/>
-                </aside>
-            </div>
             <footer>
                 <ui:insert name="footer" >
 		  <ui:include src="/template/footer.xhtml" />

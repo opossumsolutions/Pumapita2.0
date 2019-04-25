@@ -24,24 +24,97 @@ and open the template in the editor.
 		</ui:insert>
             </header>
             <div id="main">
-                <section>
-                     <h:form id="form" class="formulario">
-                        <p:messages id="messages" showDetail="true" closable="true">
-                            <p:autoUpdate />
-                        </p:messages>
-                        <p:inputText  class="texto" id="nombre" value="#{editaUsuario.nombre}"  placeholder="Nombre"/> <br/>
-                        <p:commandButton class="texto" action="#{editaUsuario.editaUsuarioNombre()}" value="Edita Nombre" ajax="false"/>
-                        <p:inputText  class="texto" id="contrasenia" value="#{editaUsuario.contrasenia}"  placeholder="contraseña"/> <br/>
-                        <p:commandButton class="texto" action="#{editaUsuario.editaUsuarioContrasenia()}" value="Edita Contraseña" ajax="false"/>
-                        <p:commandButton class="texto" action="#{editaUsuario.eliminaUsuario()}" value="Elimina Usuario" ajax="false"/>
-                    </h:form>
-                </section>
-                <aside>
-                    <h1>Hola #{user.nombre} </h1><br/>
-                    <h2>Tu rol es #{user.rol}</h2>
-                    <h2>Tu correo es #{user.correo}</h2>
-                    
-                </aside>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-lg-4"/>
+                    <div class="ui-g-12 ui-md-6 ui-lg-4">
+                        <h1>#{user.nombre} </h1><br/>
+                        <h2>#{user.rol}</h2>
+                        <h2>#{user.correo}</h2>
+                    </div>
+                    <div class="ui-g-12 ui-md-6 ui-lg-1">
+                        <div  class="ui-g-12 ui-md-6 ui-lg-6">
+                            <h:form>
+                                <h:outputLink value="javascript:void(0)" onclick="PF('dlg2').show();" title="login">
+                                    <p:graphicImage name="/images/configuracion.png" width="45">
+                                    </p:graphicImage>
+                                </h:outputLink>
+                                <p:dialog header="Editar Perfil" widgetVar="dlg2" resizable="false">
+                                    <h:panelGrid>
+                                        <h:form id="form" class="formulario">
+                                            <p:messages id="message" closable="true">
+                                                <p:autoUpdate />
+                                            </p:messages>
+                                               <h:form class="formulario">
+                                                    <p:messages id="messages" showDetail="true" closable="true">
+                                                        <p:autoUpdate />
+                                                    </p:messages>
+                                                    <div class="ui-g">
+                                                        <div class="ui-g-4">
+                                                            <p:outputLabel for="nombre" value="Nombre:" />
+                                                        </div>
+                                                        <div class="ui-g-8">
+                                                            <p:inputText  class="texto" id="nombre" value="#{editaUsuario.nombre}"  placeholder="Nombre"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ui-g">
+                                                        <div class="ui-g-4">
+                                                            <p:outputLabel for="email" value="Correo:" />
+                                                        </div>
+                                                        <div class="ui-g-8">
+                                                            <p:inputText  class="texto" id="email" value="#{editaUsuario.correo}"  placeholder="Correo"/>
+                                                        </div>
+                                                    </div>
+                                                   <div class="ui-g">
+                                                        <div class="ui-g-4">
+                                                            <p:outputLabel for="contrasenia" value="Contraseña:" />
+                                                        </div>
+                                                        <div class="ui-g-8">
+                                                            <p:inputText  class="texto" id="contrasenia" value="#{editaUsuario.contrasenia}"  placeholder="contraseña"/> <br/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ui-g">
+                                                        <div class="ui-g-4"/>
+                                                        <div class="ui-g-2">
+                                                            <p:commandButton value="Editar" actionListener="#{editaUsuario.editaUsuario()}">
+                                                                <p:confirm message="¿Seguro que quieres editar?" header="Aviso"/>
+                                                            </p:commandButton>  
+                                                        </div>
+                                                    </div>
+                                                    <p:confirmDialog global="true">
+                                                        <div class="ui-g">
+                                                            <div class="ui-g-1"/>
+                                                            <div class="ui-g-4">
+                                                              <p:commandButton value="Si" type="button" icon="ui-icon-check" styleClass="ui-confirmdialog-yes"/>  
+                                                            </div>
+                                                            <div class="ui-g-2"/>
+                                                            <div class="ui-g-4">
+                                                            <p:commandButton value="No" type="button" icon="ui-icon-close" styleClass="ui-confirmdialog-no"/>
+                                                            </div>
+                                                        </div>
+                                                    </p:confirmDialog>
+                                                </h:form>
+                                        </h:form>
+                                    </h:panelGrid>
+                                </p:dialog> 
+                            </h:form>
+                        </div>
+                        <div  class="ui-g-12 ui-md-6 ui-lg-6">
+                            <h:form id="form2">
+                                <h:outputLink value="javascript:void(0)" onclick="PF('dlg3').show();" title="logout">
+                                    <p:graphicImage name="/images/logout.png" width="50">
+                                    </p:graphicImage>
+                                </h:outputLink>
+                                <p:dialog header="Eliminar Usuario" widgetVar="dlg3" resizable="false">
+                                    <h3>¿Estas seguro?</h3>
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <p:commandButton class="texto" action="#{editaUsuario.eliminaUsuario()}" value="Si" update="form2"/>
+                                        <p:commandButton value="No" onclick="PF('dlg3').hide();$('#form').trigger('reset');" type="button" /> 
+                                    </h:panelGrid>
+                                </p:dialog> 
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
             </div>
             <footer>
                 <ui:insert name="footer" >
@@ -52,3 +125,5 @@ and open the template in the editor.
         </h:body>
     </f:view>
 </html>
+
+
