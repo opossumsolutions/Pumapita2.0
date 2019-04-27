@@ -24,8 +24,8 @@ and open the template in the editor.
                     <div class="ui-g-10">
                         <h:form id="busqueda">
                             <p:message for="search"/>
-                            <p:inputText type="search" id="search" value="#{buscaPorNombre.nombre}" required="true" requiredMessage="No hay personas sin nombre"/>
-                            <p:commandButton action="#{buscaPorNombre.buscaPorNombre()}" styleClass = "myButton" value="Busca" update="busqueda"/>          
+                            <p:inputText type="search" id="search" value="#{buscaPorNombre.nombre}" required="true" requiredMessage="Busqueda Vacia"/>
+                            <p:commandButton action="#{buscaPorNombre.buscaPorNombre()}" update="busqueda" icon="ui-icon-search"/>          
                         </h:form>
                     </div>
                     <div class="ui-g-1">

@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -27,9 +22,11 @@ and open the template in the editor.
                 <div class="ui-g">
                     <div class="ui-g-12 ui-md-6 ui-lg-4"/>
                     <div class="ui-g-12 ui-md-6 ui-lg-4">
-                        <h1>#{user.nombre} </h1><br/>
-                        <h2>#{user.rol}</h2>
-                        <h2>#{user.correo}</h2>
+                        <h:form id="output" rendered="true">
+                            <h1>#{user.nombre} </h1>
+                            <h2>#{user.rol}</h2>
+                            <h2>#{user.correo}</h2>
+                        </h:form>
                     </div>
                     <div class="ui-g-12 ui-md-6 ui-lg-1">
                         <div  class="ui-g-12 ui-md-6 ui-lg-6">
@@ -75,7 +72,7 @@ and open the template in the editor.
                                                     <div class="ui-g">
                                                         <div class="ui-g-4"/>
                                                         <div class="ui-g-2">
-                                                            <p:commandButton value="Editar" actionListener="#{editaUsuario.editaUsuario()}">
+                                                            <p:commandButton value="Editar" action="#{editaUsuario.editaUsuario()}" ajax="true">
                                                                 <p:confirm message="¿Seguro que quieres editar?" header="Aviso"/>
                                                             </p:commandButton>  
                                                         </div>
@@ -101,7 +98,7 @@ and open the template in the editor.
                         <div  class="ui-g-12 ui-md-6 ui-lg-6">
                             <h:form id="form2">
                                 <h:outputLink value="javascript:void(0)" onclick="PF('dlg3').show();" title="logout">
-                                    <p:graphicImage name="/images/logout.png" width="50">
+                                    <p:graphicImage name="/images/eliminar.png" width="50">
                                     </p:graphicImage>
                                 </h:outputLink>
                                 <p:dialog header="Eliminar Usuario" widgetVar="dlg3" resizable="false">

@@ -88,10 +88,24 @@ public class EditaUsuario {
         UsuarioDAO udb = new UsuarioDAO();
         ControladorSesion.UserLogged us= (ControladorSesion.UserLogged) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
         Usuario u = udb.buscaPorCorreo(us.getCorreo());
+        if(contrasenia==""){
+            contrasenia=u.getContrasenia();
+        }
+        if(correo==""){
+            correo=u.getCorreo();
+        }
+        if(nombre==""){
+            nombre=u.getNombre();
+        }
         u.setContrasenia(contrasenia);
         u.setNombre(nombre);
         u.setCorreo(correo);
         udb.update(u);
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        ControladorSesion sesion = new ControladorSesion();
+        sesion.setCorreo(this.correo);
+        sesion.setContrasenia(this.contrasenia);
+        sesion.login();
         return "/comentarista/perfil?faces-redirect=true";
     }
     
