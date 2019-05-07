@@ -9,6 +9,10 @@ import is.mapita.modelo.Rol;
 import is.mapita.modelo.Usuario;
 import is.mapita.modelo.UsuarioDAO;
 import java.util.Date;
+import java.security.SecureRandom;
+import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -68,7 +72,7 @@ public class AgregaUsuario {
         this.fechanacimiento = fechanacimiento;
     }
     
-    public void agregaUsuario(String usuario){
+    public void agregaUsuario(String usuario) throws ParseException{
         Usuario u = new Usuario();
         UsuarioDAO udao= new UsuarioDAO();
         if(udao.buscaPorCorreo(correo)==null){
@@ -79,9 +83,15 @@ public class AgregaUsuario {
             if(usuario.equals("comentarista")){
                 u.setRol(Rol.COMENTARISTA);
             }else if(usuario.equals("informador")){
-                Mail email = new Mail();
-                email.sendMail("Registro","Bienvenido a mapita",correo);
+                SecureRandom random = new SecureRandom();
+                String random1 = new BigInteger(30, random).toString(32);
+                nombre="user"+random1;
+                u.setNombre(nombre);
+                String random2=new BigInteger(130, random).toString(32);
+                u.setContrasenia(random2);
                 u.setRol(Rol.INFORMADOR);
+                Mail email = new Mail();
+                email.sendMail("Registro mapita","tu contraseña es: "+random2+"\nTu nombre de usuario aleatorio es: "+random1,correo+"");
             }else {
                 u.setRol(Rol.ADMINISTRADOR);
             }

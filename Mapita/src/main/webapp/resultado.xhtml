@@ -24,7 +24,7 @@ and open the template in the editor.
                     <c:if test="#{ empty buscaPorNombre.resultado}">
                         <h1>No hay coincidencias</h1>
                     </c:if>
-                    <c:if test="#{user.rol eq 'ADMINISTRADOR'}">
+                    <c:if test="#{user.rol eq 'ADMINISTRADOR' and not(empty buscaPorNombre.resultado)}">
                     <p:dataTable value="#{buscaPorNombre.resultado}" var="resultado" paginator="true" paginatorPosition="bottom" rows="15">
                         <p:column>
                             <h:selectBooleanCheckbox value="#{resultado.selected}" />

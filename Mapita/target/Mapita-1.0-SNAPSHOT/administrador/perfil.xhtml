@@ -75,6 +75,14 @@ and open the template in the editor.
                                                             <p:inputText  class="texto" id="contrasenia" value="#{editaUsuario.contrasenia}"  placeholder="contraseña"/> <br/>
                                                         </div>
                                                     </div>
+                                                   <div class="ui-g">
+                                                        <div class="ui-g-4">
+                                                            <p:outputLabel for="fechanacimiento" value="Fecha de Nacimiento:" />
+                                                        </div>
+                                                        <div class="ui-g-8">
+                                                            <p:calendar class="texto" id="fechanacimiento" value="#{editaUsuario.fechanacimiento}" required="true" placeholder="Fecha de nacimiento" requiredMessage="Por favor ingresa tu fecha de nacimiento"  /> <br/>
+                                                        </div>
+                                                    </div>
                                                     <div class="ui-g">
                                                         <div class="ui-g-4"/>
                                                         <div class="ui-g-2">
@@ -114,19 +122,11 @@ and open the template in the editor.
                                                 <p:autoUpdate />
                                             </p:messages>
                                             <h:panelGrid columns="3" cellpadding="5">
-                                                <p:outputLabel for="nombre" value="Nombre:" />
-                                                <p:inputText  class="texto" id="nombre" value="#{agregaUsuario.nombre}" required="true" placeholder="Nombre"  validatorMessage="Por favor ingresa tu nombre" requiredMessage="Por favor ingresa tu nombre"/> <br/>
                                                 <p:outputLabel for="correo" value="Correo:" />
                                                 <p:inputText class="texto" id="correo" value="#{agregaUsuario.correo}" required="true" placeholder="Correo" autocomplete="off" validatorMessage="Debe ser un correo valido"> 
                                                     <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                                                     <p:keyFilter regEx="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
                                                 </p:inputText> <br/>
-                                                <p:outputLabel for="contrasenia" value="Contraseña:" />
-                                                <p:password class="texto" id="contrasenia" value="#{agregaUsuario.contrasenia}" placeholder="Contrasenia" match="contr" required="true" validatorMessage="No coinciden las contrasenias"/> <br/>
-                                                <p:outputLabel for="contr" value="Confirma:" />
-                                                <p:password class="texto" id="contr" value="#{agregaUsuario.contrasenia}" placeholder="Confirma" required="true"/> <br/>
-                                                <p:outputLabel for="fechanacimiento" value="Fecha de Nacimiento:" />
-                                                <p:calendar class="texto" id="fechanacimiento" value="#{agregaUsuario.fechanacimiento}" required="true" placeholder="Fecha de nacimiento" requiredMessage="Por favor ingresa tu fecha de nacimiento"  /> <br/>
                                                 <p:commandButton action="#{agregaUsuario.agregaUsuario('informador')}" value="enviar"/>
                                             </h:panelGrid>
                                         </h:form>

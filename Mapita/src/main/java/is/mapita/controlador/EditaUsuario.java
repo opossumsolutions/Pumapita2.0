@@ -5,8 +5,10 @@
  */
 package is.mapita.controlador;
 
+import is.mapita.modelo.Rol;
 import is.mapita.modelo.Usuario;
 import is.mapita.modelo.UsuarioDAO;
+import java.util.Date;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -22,9 +24,18 @@ public class EditaUsuario {
     private String nombre;
     private String contrasenia;
     private String correo;
+    private Date fechanacimiento;
     private List<Usuario> resultado;
     private List<Usuario> eliminados;
 
+    public Date getFechanacimiento() {
+        return fechanacimiento;
+    }
+
+    public void setFechanacimiento(Date fechanacimiento) {
+        this.fechanacimiento = fechanacimiento;
+    }
+    
     public String getCorreo() {
         return correo;
     }
@@ -97,16 +108,26 @@ public class EditaUsuario {
         if(nombre==""){
             nombre=u.getNombre();
         }
+        if(fechanacimiento==null){
+            fechanacimiento=u.getFechanacimiento();
+        }
         u.setContrasenia(contrasenia);
         u.setNombre(nombre);
         u.setCorreo(correo);
+        u.setFechanacimiento(fechanacimiento);
         udb.update(u);
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
         ControladorSesion sesion = new ControladorSesion();
         sesion.setCorreo(this.correo);
         sesion.setContrasenia(this.contrasenia);
         sesion.login();
-        return "/comentarista/perfil?faces-redirect=true";
+        if(u.getRol()==Rol.COMENTARISTA){
+                return "/comentarista/perfil?faces-redirect=true";
+            }else if(u.getRol()==Rol.INFORMADOR){
+                return "/informador/perfil?faces-redirect=true";
+            }else{
+                return "/administrador/perfil?faces-redirect=true";
+            }
     }
     
     public String eliminaUsuario(){
