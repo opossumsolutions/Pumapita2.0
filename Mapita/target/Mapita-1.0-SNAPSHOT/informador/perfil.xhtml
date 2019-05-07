@@ -31,6 +31,7 @@ and open the template in the editor.
                             <h1>#{user.nombre} </h1>
                             <h2>#{user.rol}</h2>
                             <h2>#{user.correo}</h2>
+                            <h2>#{user.fechanacimiento}</h2>
                         </h:form>
                     </div>
                     <div class="ui-g-12 ui-md-6 ui-lg-1">
@@ -40,7 +41,7 @@ and open the template in the editor.
                                     <p:graphicImage name="/images/configuracion.png" width="45">
                                     </p:graphicImage>
                                 </h:outputLink>
-                                <p:dialog header="Editar Perfil" widgetVar="dlg2" resizable="false">
+                                <p:dialog header="Editar Perfil" widgetVar="dlg2" resizable="false"  modal="true">
                                     <h:panelGrid>
                                         <h:form id="form" class="formulario">
                                             <p:messages id="message" closable="true">
@@ -106,7 +107,7 @@ and open the template in the editor.
                                     <p:graphicImage name="/images/eliminar.png" width="50">
                                     </p:graphicImage>
                                 </h:outputLink>
-                                <p:dialog header="Eliminar Usuario" widgetVar="dlg3" resizable="false">
+                                <p:dialog header="Eliminar Usuario" widgetVar="dlg3" resizable="false"  modal="true">
                                     <h3>¿Estas seguro?</h3>
                                     <h:panelGrid columns="2" cellpadding="5">
                                         <p:commandButton class="texto" action="#{editaUsuario.eliminaUsuario()}" value="Si" update="form2"/>

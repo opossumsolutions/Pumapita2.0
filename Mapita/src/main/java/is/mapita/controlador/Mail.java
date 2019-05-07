@@ -11,12 +11,12 @@ import javax.mail.internet.MimeMessage;
 
 /**
  *
- * @author jonathan
+ * @author juan
  */
 public class Mail {
     
-    private static final String username = "correo";
-    private static final String passWord = "contraseña";
+    private static final String username = "opossumsolutions@gmail.com";
+    private static final String passWord = "1234abcd.";
     
     
     public static void sendMail(String subject,String mensaje, String to) {

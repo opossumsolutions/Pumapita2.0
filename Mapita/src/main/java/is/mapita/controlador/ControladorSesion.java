@@ -9,6 +9,7 @@ import is.mapita.modelo.Rol;
 import is.mapita.modelo.Usuario;
 import is.mapita.modelo.UsuarioDAO;
 import java.io.Serializable;
+import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -46,7 +47,7 @@ public class ControladorSesion implements Serializable{
         Usuario user = udb.buscaPorCorreoContrasenia(correo, contrasenia);
         FacesContext context = FacesContext.getCurrentInstance();
         if(user !=null){
-            UserLogged u = new UserLogged(user.getNombre(),user.getCorreo(),user.getRol());
+            UserLogged u = new UserLogged(user.getNombre(),user.getCorreo(),user.getRol(), user.getFechanacimiento());
             if(user.getRol()==Rol.COMENTARISTA){
                 
                 context.getExternalContext().getSessionMap().put("user", u);
@@ -61,7 +62,7 @@ public class ControladorSesion implements Serializable{
                 return "/administrador/perfil?faces-redirect=true";
             }
         }
-        Mensajes.error("NO hay usuarios con este correo"+this.correo);
+        Mensajes.error("Correo o contraseña incorrectos");
         return "";
     }
     
@@ -74,14 +75,22 @@ public class ControladorSesion implements Serializable{
         private String nombre;
         private String correo;
         private Rol rol;
+        private Date fechanacimiento;
 
-        public UserLogged(String nombre, String correo, Rol rol) {
+        public UserLogged(String nombre, String correo, Rol rol,Date fechanacimiento) {
             this.nombre = nombre;
             this.correo = correo;
             this.rol = rol;
+            this.fechanacimiento=fechanacimiento;
         }
 
-        
+        public Date getFechanacimiento() {
+            return fechanacimiento;
+        }
+
+        public void setFechanacimiento(Date fechanacimiento) {
+            this.fechanacimiento = fechanacimiento;
+        }
         
         public String getNombre() {
             return nombre;

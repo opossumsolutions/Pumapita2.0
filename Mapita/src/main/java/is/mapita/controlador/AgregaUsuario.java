@@ -68,24 +68,31 @@ public class AgregaUsuario {
         this.fechanacimiento = fechanacimiento;
     }
     
-    public void agregaUsuario(){
+    public void agregaUsuario(String usuario){
         Usuario u = new Usuario();
-        u.setNombre(nombre);
-        u.setCorreo(correo);
-        u.setContrasenia(contrasenia);
-        u.setFechanacimiento(fechanacimiento);
-        if(this.rol.equals("comentarista")){
-            u.setRol(Rol.COMENTARISTA);
-        }else if(this.rol.equals("informador")){
-            u.setRol(Rol.INFORMADOR);
-        }else {
-            u.setRol(Rol.ADMINISTRADOR);
+        UsuarioDAO udao= new UsuarioDAO();
+        if(udao.buscaPorCorreo(correo)==null){
+            u.setNombre(nombre);
+            u.setCorreo(correo);
+            u.setContrasenia(contrasenia);
+            u.setFechanacimiento(fechanacimiento);
+            if(usuario.equals("comentarista")){
+                u.setRol(Rol.COMENTARISTA);
+            }else if(usuario.equals("informador")){
+                Mail email = new Mail();
+                email.sendMail("Registro","Bienvenido a mapita",correo);
+                u.setRol(Rol.INFORMADOR);
+            }else {
+                u.setRol(Rol.ADMINISTRADOR);
+            }
+
+            UsuarioDAO udb = new UsuarioDAO();
+            udb.save(u);
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage("Has sido registrado con éxito " + nombre));
+        }else{
+            Mensajes.warn("correo ya registrado.\nInicie sesion o intente con uno diferente");
         }
-            
-        UsuarioDAO udb = new UsuarioDAO();
-        udb.save(u);
-        FacesContext.getCurrentInstance().addMessage(null,
-                new FacesMessage("Has sido registrado con éxito " + nombre));
     }
     
 }

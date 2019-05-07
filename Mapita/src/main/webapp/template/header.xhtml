@@ -30,17 +30,20 @@ and open the template in the editor.
                     </div>
                     <div class="ui-g-1">
                         <c:if test="#{ empty user}">
-                            <h:form>        
+                            <h:form >        
                                 <h:outputLink value="javascript:void(0)" onclick="PF('dlg').show();" title="login">
                                     <p:graphicImage name="/images/login.png" width="50">
                                     </p:graphicImage>
                                 </h:outputLink>
-                                <p:dialog header="Inicio Sesion" widgetVar="dlg" resizable="false">
+                                <p:dialog header="Inicio Sesion" widgetVar="dlg" resizable="false" modal="true">
                                     <h:panelGrid columns="2" cellpadding="5">
                                             <h:form id="login">
+                                                <p:messages id="message" closable="true">
+                                                    <p:autoUpdate />
+                                                </p:messages>
                                                 <h:panelGrid columns="3" cellpadding="5">
                                                     <p:outputLabel for="email" value="Correo:" />
-                                                    <p:inputText class="texto" id="email" value="#{controladorSesion.correo}" placeholder="Correo" required="true" requiredMessage="Por favor ingresa tu correo" validatorMessage="Debe ser un correo valido">
+                                                    <p:inputText class="texto" id="email" value="#{controladorSesion.correo}" immediate="true"  placeholder="Correo" required="true" requiredMessage="Por favor ingresa tu correo" validatorMessage="Debe ser un correo valido">
                                                         <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                                                         <p:keyFilter regEx="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
                                                     </p:inputText>
@@ -48,7 +51,7 @@ and open the template in the editor.
                                                     <p:outputLabel for="password" value="Contraseña:" />
                                                     <p:password class="texto" id="password" value="#{controladorSesion.contrasenia}" placeholder="Contrasenia"  required="true" requiredMessage="Por favor ingresa tu contrasenia"/>
                                                     <p:message for="password"/>
-                                                    <p:commandButton class="texto" action="#{controladorSesion.login()}" value="Iniciar" update="login" />
+                                                    <p:commandButton class="texto" action="#{controladorSesion.login()}" value="Iniciar" />
                                                 </h:panelGrid>
                                             </h:form>  
                                     </h:panelGrid>
@@ -61,7 +64,7 @@ and open the template in the editor.
                                     <p:graphicImage name="/images/logout.png" width="50">
                                     </p:graphicImage>
                                 </h:outputLink>
-                                <p:dialog header="Cerrar Sesion" widgetVar="dlg" resizable="false">
+                                <p:dialog header="Cerrar Sesion" widgetVar="dlg" resizable="false" modal="true">
                                     <h:panelGrid columns="2" cellpadding="5">
                                             <h:form id="logout">
                                                 <h:panelGrid columns="3" cellpadding="5">
@@ -81,7 +84,7 @@ and open the template in the editor.
                                     <p:graphicImage name="/images/registro.png" width="45">
                                     </p:graphicImage>
                                 </h:outputLink>
-                                <p:dialog header="Registro" widgetVar="dlg2" resizable="false">
+                                <p:dialog header="Registro" widgetVar="dlg2" resizable="false" modal="true">
                                     <h:panelGrid columns="2" cellpadding="5">
                                         <h:form id="form" class="formulario">
                                             <p:messages id="message" closable="true">
@@ -91,23 +94,17 @@ and open the template in the editor.
                                                 <p:outputLabel for="nombre" value="Nombre:" />
                                                 <p:inputText  class="texto" id="nombre" value="#{agregaUsuario.nombre}" required="true" placeholder="Nombre"  validatorMessage="Por favor ingresa tu nombre" requiredMessage="Por favor ingresa tu nombre"/> <br/>
                                                 <p:outputLabel for="correo" value="Correo:" />
-                                                <p:inputText class="texto" id="correo" value="#{agregaUsuario.correo}" required="true" placeholder="Correo" validatorMessage="Debe ser un correo valido"> 
+                                                <p:inputText class="texto" id="correo" value="#{agregaUsuario.correo}" required="true" placeholder="Correo" autocomplete="off" validatorMessage="Debe ser un correo valido"> 
                                                     <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
                                                     <p:keyFilter regEx="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
                                                 </p:inputText> <br/>
-                                                <p:outputLabel for="rol" value="Rol:"/>
-                                                <p:selectOneMenu id="rol" value="#{agregaUsuario.rol}" style="width:125px">
-                                                    <f:selectItem itemLabel="Comentarista" itemValue="comentarista" />
-                                                    <f:selectItem itemLabel="Informador" itemValue="informador" />
-                                                    <f:selectItem itemLabel="Administrador" itemValue="administrador" />
-                                                </p:selectOneMenu><br/>
                                                 <p:outputLabel for="contrasenia" value="Contraseña:" />
                                                 <p:password class="texto" id="contrasenia" value="#{agregaUsuario.contrasenia}" placeholder="Contrasenia" match="contr" required="true" validatorMessage="No coinciden las contrasenias"/> <br/>
                                                 <p:outputLabel for="contr" value="Confirma:" />
                                                 <p:password class="texto" id="contr" value="#{agregaUsuario.contrasenia}" placeholder="Confirma" required="true"/> <br/>
                                                 <p:outputLabel for="fechanacimiento" value="Fecha de Nacimiento:" />
                                                 <p:calendar class="texto" id="fechanacimiento" value="#{agregaUsuario.fechanacimiento}" required="true" placeholder="Fecha de nacimiento" requiredMessage="Por favor ingresa tu fecha de nacimiento"  /> <br/>
-                                                <p:commandButton action="#{agregaUsuario.agregaUsuario()}" value="enviar"/>
+                                                <p:commandButton action="#{agregaUsuario.agregaUsuario('comentarista')}" value="enviar"/>
                                             </h:panelGrid>
                                         </h:form>
                                     </h:panelGrid>

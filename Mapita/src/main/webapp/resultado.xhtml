@@ -24,7 +24,7 @@ and open the template in the editor.
                     <c:if test="#{ empty buscaPorNombre.resultado}">
                         <h1>No hay coincidencias</h1>
                     </c:if>
-                    <c:if test="#{not empty buscaPorNombre.resultado}">
+                    <c:if test="#{user.rol eq 'ADMINISTRADOR'}">
                     <p:dataTable value="#{buscaPorNombre.resultado}" var="resultado" paginator="true" paginatorPosition="bottom" rows="15">
                         <p:column>
                             <h:selectBooleanCheckbox value="#{resultado.selected}" />
@@ -44,6 +44,16 @@ and open the template in the editor.
                         <p:commandButton value="Si" type="button" icon="ui-icon-check" styleClass="ui-confirmdialog-yes"/>
                         <p:commandButton value="No" type="button" icon="ui-icon-close" styleClass="ui-confirmdialog-no"/>
                     </p:confirmDialog>
+                    </c:if>
+                    <c:if test="#{not empty buscaPorNombre.resultado and not(user.rol eq 'ADMINISTRADOR')}">
+                    <p:dataTable value="#{buscaPorNombre.resultado}" var="resultado" paginator="true" paginatorPosition="bottom" rows="15">
+                        <p:column headerText="Nombre">
+                            <h:outputText value="#{resultado.nombre}"/>
+                        </p:column>
+                        <p:column headerText="Correo">
+                            <h:outputText value="#{resultado.correo}"/>
+                        </p:column>
+                    </p:dataTable>
                     </c:if>
                 </h:form>            
         </h:body>

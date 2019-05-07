@@ -31,16 +31,17 @@ and open the template in the editor.
                             <h1>#{user.nombre} </h1>
                             <h2>#{user.rol}</h2>
                             <h2>#{user.correo}</h2>
+                            <h2>#{user.fechanacimiento}</h2>
                         </h:form>
                     </div>
                     <div class="ui-g-12 ui-md-6 ui-lg-1">
                         <div  class="ui-g-12 ui-md-6 ui-lg-6">
                             <h:form>
-                                <h:outputLink value="javascript:void(0)" onclick="PF('dlg2').show();" title="login">
+                                <h:outputLink value="javascript:void(0)" onclick="PF('dlg1').show();" title="login">
                                     <p:graphicImage name="/images/configuracion.png" width="45">
                                     </p:graphicImage>
                                 </h:outputLink>
-                                <p:dialog header="Editar Perfil" widgetVar="dlg2" resizable="false">
+                                <p:dialog header="Editar Perfil" widgetVar="dlg1" resizable="false" modal="true">
                                     <h:panelGrid>
                                         <h:form id="form" class="formulario">
                                             <p:messages id="message" closable="true">
@@ -100,19 +101,37 @@ and open the template in the editor.
                                 </p:dialog> 
                             </h:form>
                         </div>
-                        <div  class="ui-g-12 ui-md-6 ui-lg-6">
-                            <h:form id="form2">
-                                <h:outputLink value="javascript:void(0)" onclick="PF('dlg3').show();" title="logout">
-                                    <p:graphicImage name="/images/eliminar.png" width="50">
+                        <div class="ui-g-12 ui-md-6 ui-lg-6">
+                            <h:form>        
+                                <h:outputLink value="javascript:void(0)" onclick="PF('dlg2').show();">
+                                    <p:graphicImage name="/images/registro.png" width="50">
                                     </p:graphicImage>
                                 </h:outputLink>
-                                <p:dialog header="Eliminar Usuario" widgetVar="dlg3" resizable="false">
-                                    <h3>¿Estas seguro?</h3>
+                                <p:dialog header="Registro Informadores" widgetVar="dlg2" resizable="false" modal="true">
                                     <h:panelGrid columns="2" cellpadding="5">
-                                        <p:commandButton class="texto" action="#{editaUsuario.eliminaUsuario()}" value="Si" update="form2"/>
-                                        <p:commandButton value="No" onclick="PF('dlg3').hide();$('#form').trigger('reset');" type="button" /> 
+                                        <h:form id="form" class="formulario">
+                                            <p:messages id="message" closable="true">
+                                                <p:autoUpdate />
+                                            </p:messages>
+                                            <h:panelGrid columns="3" cellpadding="5">
+                                                <p:outputLabel for="nombre" value="Nombre:" />
+                                                <p:inputText  class="texto" id="nombre" value="#{agregaUsuario.nombre}" required="true" placeholder="Nombre"  validatorMessage="Por favor ingresa tu nombre" requiredMessage="Por favor ingresa tu nombre"/> <br/>
+                                                <p:outputLabel for="correo" value="Correo:" />
+                                                <p:inputText class="texto" id="correo" value="#{agregaUsuario.correo}" required="true" placeholder="Correo" autocomplete="off" validatorMessage="Debe ser un correo valido"> 
+                                                    <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+                                                    <p:keyFilter regEx="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                                                </p:inputText> <br/>
+                                                <p:outputLabel for="contrasenia" value="Contraseña:" />
+                                                <p:password class="texto" id="contrasenia" value="#{agregaUsuario.contrasenia}" placeholder="Contrasenia" match="contr" required="true" validatorMessage="No coinciden las contrasenias"/> <br/>
+                                                <p:outputLabel for="contr" value="Confirma:" />
+                                                <p:password class="texto" id="contr" value="#{agregaUsuario.contrasenia}" placeholder="Confirma" required="true"/> <br/>
+                                                <p:outputLabel for="fechanacimiento" value="Fecha de Nacimiento:" />
+                                                <p:calendar class="texto" id="fechanacimiento" value="#{agregaUsuario.fechanacimiento}" required="true" placeholder="Fecha de nacimiento" requiredMessage="Por favor ingresa tu fecha de nacimiento"  /> <br/>
+                                                <p:commandButton action="#{agregaUsuario.agregaUsuario('informador')}" value="enviar"/>
+                                            </h:panelGrid>
+                                        </h:form>
                                     </h:panelGrid>
-                                </p:dialog> 
+                                </p:dialog>    
                             </h:form>
                         </div>
                     </div>
