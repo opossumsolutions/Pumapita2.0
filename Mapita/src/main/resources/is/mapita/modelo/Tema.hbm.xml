@@ -7,7 +7,7 @@
             <column name="idtema" />
             <generator class="identity" />
         </id>
-        <many-to-one name="usuario" class="is.lab.mapita.modelo.Usuario" fetch="select">
+        <many-to-one name="usuario" class="is.mapita.modelo.Usuario" fetch="select">
             <column name="usuarioid" />
         </many-to-one>
         <property name="nombre" type="string">
@@ -16,5 +16,11 @@
         <property name="color" type="string">
             <column name="color" not-null="true" />
         </property>
+        <set name="marcadores" table="marcador" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="usuarioid" />
+            </key>
+            <one-to-many class="is.mapita.modelo.Marcador" />
+        </set>
     </class>
 </hibernate-mapping>

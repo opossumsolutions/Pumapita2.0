@@ -5,6 +5,9 @@
  */
 package is.mapita.modelo;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * @author juan
@@ -15,6 +18,7 @@ public class Tema  implements java.io.Serializable {
      private Usuario usuario;
      private String nombre;
      private String color;
+     private Set marcadores = new HashSet(0);
 
     public Tema() {
     }
@@ -25,12 +29,22 @@ public class Tema  implements java.io.Serializable {
         this.color = color;
     }
 
-    public Tema(int idtema, Usuario usuario, String nombre, String color) {
+    public Tema(int idtema, Usuario usuario, String nombre, String color,Set marcadores) {
         this.idtema = idtema;
         this.usuario = usuario;
         this.nombre = nombre;
         this.color = color;
+        this.marcadores = marcadores;
     }
+
+    public Set getMarcadores() {
+        return marcadores;
+    }
+
+    public void setMarcadores(Set marcadores) {
+        this.marcadores = marcadores;
+    }
+    
 
     public int getIdtema() {
         return idtema;

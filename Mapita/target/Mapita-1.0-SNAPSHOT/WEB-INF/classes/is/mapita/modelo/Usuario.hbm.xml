@@ -19,11 +19,11 @@
     <property name="fechanacimiento" type="date">
       <column length="13" name="fechanacimiento"/>
     </property>
-    <set name="marcadors" table="marcador" inverse="true" lazy="true" fetch="select">
+    <set name="temas" table="tema" inverse="true" lazy="true" fetch="select">
         <key>
             <column name="usuarioid" />
         </key>
-        <one-to-many class="is.lab.mapita.modelo.Marcador" />
+        <one-to-many class="is.mapita.modelo.Tema" />
     </set>
     <property name="rol">
       <type name="org.hibernate.type.EnumType">
