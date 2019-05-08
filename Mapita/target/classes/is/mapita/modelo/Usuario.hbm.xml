@@ -19,6 +19,12 @@
     <property name="fechanacimiento" type="date">
       <column length="13" name="fechanacimiento"/>
     </property>
+    <set name="marcadors" table="marcador" inverse="true" lazy="true" fetch="select">
+        <key>
+            <column name="usuarioid" />
+        </key>
+        <one-to-many class="is.lab.mapita.modelo.Marcador" />
+    </set>
     <property name="rol">
       <type name="org.hibernate.type.EnumType">
         <param name="enumClass">is.mapita.modelo.Rol</param>
