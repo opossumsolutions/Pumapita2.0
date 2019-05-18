@@ -11,7 +11,7 @@
         <h:head>
             <title>Inicio</title>
             <h:outputStylesheet name="css/estilos.css"/>
-            
+            <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=true"></script>
         </h:head>
         <h:body>
             <header>
@@ -20,7 +20,13 @@
 		</ui:insert>
                 
             </header>
-            
+            <body>
+                <div class="ui-g">
+                    <div class="ui-g-8">
+                        <p:gmap center="23.382390, -102.291477" zoom="5" type="HYBRID" style="width:100%; height:700px"  />
+                     </div>
+                </div>
+            </body>
             <footer>
                 <ui:insert name="footer" >
 		  <ui:include src="/template/footer.xhtml" />
