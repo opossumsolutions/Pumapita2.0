@@ -13,6 +13,7 @@ public class Marcador  implements java.io.Serializable {
 
      private int idmarcador;
      private Usuario usuario;
+     private Tema tema;
      private String descripcion;
      private double longitud;
      private double latitud;
@@ -85,6 +86,12 @@ public class Marcador  implements java.io.Serializable {
     public void setIcon(String icon) {
         this.icon = icon;
     }
-    
-    
+
+    public Tema getTema() {
+        return tema;
+    }
+
+    public void setTema(Tema tema) {
+        this.tema = tema;
+    }
 }

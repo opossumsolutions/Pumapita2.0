@@ -35,7 +35,7 @@ and open the template in the editor.
                         </h:form>
                     </div>
                     <div class="ui-g-12 ui-md-6 ui-lg-1">
-                        <div  class="ui-g-12 ui-md-6 ui-lg-6">
+                        <div  class="ui-g-12 ui-md-6 ui-lg-4">
                             <h:form>
                                 <h:outputLink value="javascript:void(0)" onclick="PF('dlg2').show();" title="login">
                                     <p:graphicImage name="/images/configuracion.png" width="45">
@@ -109,7 +109,7 @@ and open the template in the editor.
                                 </p:dialog> 
                             </h:form>
                         </div>
-                        <div  class="ui-g-12 ui-md-6 ui-lg-6">
+                        <div  class="ui-g-12 ui-md-6 ui-lg-4">
                             <h:form id="form2">
                                 <h:outputLink value="javascript:void(0)" onclick="PF('dlg3').show();" title="logout">
                                     <p:graphicImage name="/images/eliminar.png" width="50">
@@ -124,6 +124,68 @@ and open the template in the editor.
                                 </p:dialog> 
                             </h:form>
                         </div>
+                        <div class="ui-g-12 ui-md-6 ui-lg-4">
+                            <h:form>        
+                                <h:outputLink value="javascript:void(0)" onclick="PF('dlg3').show();" title="nuevo tema">
+                                    <p:graphicImage name="/images/tema.png" width="50">
+                                    </p:graphicImage>
+                                </h:outputLink>
+                                <p:dialog header="Tema" widgetVar="dlg3" resizable="false" modal="true">
+                                    <h:panelGrid columns="2" cellpadding="5">
+                                        <h:form id="form" class="formulario">
+                                            <p:messages id="message" closable="true">
+                                                <p:autoUpdate />
+                                            </p:messages>
+                                            <h:panelGrid columns="3" cellpadding="5">
+                                                <p:outputLabel for="nombretema" value="Nombre tema:" />
+                                                <p:inputText  class="texto" id="nombretema" value="#{agregaTema.nombre}" required="true" placeholder="Nombre tema"  validatorMessage="Por favor ingresa nombre a tu tema" requiredMessage="Por favor ingresa nombre a tu tema"/> <br/>
+                                                <p:outputLabel for="colortema" value="Color tema:" />
+                                                <p:colorPicker id="colortema" value="#{agregaTema.color}" mode="popup" required="true"/><br/>
+                                                <p:commandButton action="#{agregaTema.agregaTema()}" value="enviar"/>
+                                            </h:panelGrid>
+                                        </h:form>
+                                    </h:panelGrid>
+                                </p:dialog>    
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-g">
+                    <div class="ui-g-12 ui-md-6 ui-lg-4"/>
+                    <div class="ui-g-12 ui-md-6 ui-lg-4">
+                        <h1><center>Temas</center></h1>
+                        <p:dataTable value="#{verTemas.resultado}" var="tema" paginator="true" paginatorPosition="bottom" rows="7">
+                        <p:column headerText="Nombre">
+                            <div class="ui-g">
+                                <div class="ui-g-12 ui-md-6 ui-lg-5">
+                                    <h:outputLink value="javascript:void(0)" onclick="PF('dlg5').show();" title="info">
+                                        <p:graphicImage name="/images/icono_info.png" width="20">
+                                        </p:graphicImage>
+                                    </h:outputLink>
+                                    <p:dialog header="Tema" widgetVar="dlg5" resizable="false" modal="true">
+                                        <h:panelGrid columns="2" cellpadding="5">
+                                            <h:form id="form" class="formulario">
+                                                <p:messages id="message" closable="true">
+                                                    <p:autoUpdate />
+                                                </p:messages>
+                                                <h:panelGrid columns="3" cellpadding="1">
+                                                    <p:outputLabel value="marcadores por tema" />
+                                                </h:panelGrid>
+                                            </h:form>
+                                        </h:panelGrid>
+                                    </p:dialog>
+                                </div>
+                                <div class="ui-g-12 ui-md-6 ui-lg-4">
+                                    <h:outputText value="#{tema.nombre}" style="align-content:center"/>
+                                </div>
+                            </div>
+                        </p:column>
+                        <p:column headerText="Color">
+                            <center>
+                                <h:outputText value="#{tema.color}"/>
+                            </center>
+                        </p:column>
+                    </p:dataTable>
                     </div>
                 </div>
             </div>

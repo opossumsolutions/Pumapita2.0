@@ -42,7 +42,7 @@ public class Usuario  implements java.io.Serializable {
        this.rol =rol;
     }
 
-    public Set getMarcadors() {
+    public Set getTemas() {
         return temas;
     }
 

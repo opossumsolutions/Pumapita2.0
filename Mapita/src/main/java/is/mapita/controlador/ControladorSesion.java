@@ -47,7 +47,7 @@ public class ControladorSesion implements Serializable{
         Usuario user = udb.buscaPorCorreoContrasenia(correo, contrasenia);
         FacesContext context = FacesContext.getCurrentInstance();
         if(user !=null){
-            UserLogged u = new UserLogged(user.getNombre(),user.getCorreo(),user.getRol(), user.getFechanacimiento());
+            UserLogged u = new UserLogged(user.getNombre(),user.getCorreo(),user.getRol(), user.getFechanacimiento(), user.getIdusuario());
             if(user.getRol()==Rol.COMENTARISTA){
                 
                 context.getExternalContext().getSessionMap().put("user", u);
@@ -76,14 +76,24 @@ public class ControladorSesion implements Serializable{
         private String correo;
         private Rol rol;
         private Date fechanacimiento;
+        private int idusuario;
 
-        public UserLogged(String nombre, String correo, Rol rol,Date fechanacimiento) {
+        public UserLogged(String nombre, String correo, Rol rol,Date fechanacimiento,int idusuario) {
             this.nombre = nombre;
             this.correo = correo;
             this.rol = rol;
             this.fechanacimiento=fechanacimiento;
+            this.idusuario= idusuario;
         }
 
+        public int getIdusuario() {
+            return idusuario;
+        }
+
+        public void setIdusuario(int idusuario) {
+            this.idusuario = idusuario;
+        }
+        
         public Date getFechanacimiento() {
             return fechanacimiento;
         }

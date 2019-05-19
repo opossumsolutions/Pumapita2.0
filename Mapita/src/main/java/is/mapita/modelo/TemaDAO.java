@@ -120,7 +120,7 @@ public class TemaDAO extends AbstractDAO<Tema>{
     
     
     
-    public List<Tema> ObtenTemasPorUsuario(String correo){
+    public List<Tema> buscaPorUsuario(String correo){
         List<Tema> m = null;
         Session session = this.sessionFactory.openSession();
         Transaction tx = null;

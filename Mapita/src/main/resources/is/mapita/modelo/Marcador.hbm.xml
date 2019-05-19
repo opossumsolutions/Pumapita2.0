@@ -8,7 +8,7 @@
             <column name="idmarcador" />
             <generator class="identity" />
         </id>
-        <many-to-one name="tema" class="is.modelo.Tema" fetch="select">
+        <many-to-one name="tema" class="is.mapita.modelo.Tema" fetch="select">
             <column name="usuarioid" />
         </many-to-one>
         <property name="descripcion" type="string">
