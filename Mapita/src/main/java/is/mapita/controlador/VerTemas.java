@@ -7,6 +7,7 @@ package is.mapita.controlador;
 
 import is.mapita.modelo.Tema;
 import is.mapita.modelo.TemaDAO;
+import is.mapita.modelo.Usuario;
 import is.mapita.modelo.UsuarioDAO;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -22,6 +23,7 @@ import javax.faces.context.FacesContext;
 @SessionScoped
 public class VerTemas {
     private List<Tema> resultado;
+    private List<Tema> eliminados;
 
     public List<Tema> getResultado() {
         return resultado;
@@ -34,16 +36,26 @@ public class VerTemas {
     @PostConstruct
     public void init() {
         TemaDAO tdb = new TemaDAO();
-        UsuarioDAO udb = new UsuarioDAO();
         ControladorSesion.UserLogged us= (ControladorSesion.UserLogged) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
         resultado = tdb.buscaPorUsuario(us.getCorreo());
     }
     
-    public void render(){
-        resultado= null;
+    public String eliminarTemas(){
         TemaDAO tdb = new TemaDAO();
+        for(Tema r : resultado){
+            if(r.isSelected()){
+                tdb.buscaTemaPorNombre(r.getNombre());
+                tdb.delete(r);
+            }
+        }
         UsuarioDAO udb = new UsuarioDAO();
         ControladorSesion.UserLogged us= (ControladorSesion.UserLogged) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-        resultado = tdb.buscaPorUsuario(us.getCorreo());
+        Usuario u = udb.buscaPorCorreo(us.getCorreo());
+        ControladorSesion cs =new ControladorSesion();
+        cs.setContrasenia(u.getContrasenia());
+        cs.setCorreo(u.getCorreo());
+        cs.logout();
+        cs.login();
+        return "/informador/perfil?faces-redirect=true";
     }
 }

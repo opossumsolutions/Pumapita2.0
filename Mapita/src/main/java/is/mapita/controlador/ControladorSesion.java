@@ -10,6 +10,7 @@ import is.mapita.modelo.Usuario;
 import is.mapita.modelo.UsuarioDAO;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -47,7 +48,7 @@ public class ControladorSesion implements Serializable{
         Usuario user = udb.buscaPorCorreoContrasenia(correo, contrasenia);
         FacesContext context = FacesContext.getCurrentInstance();
         if(user !=null){
-            UserLogged u = new UserLogged(user.getNombre(),user.getCorreo(),user.getRol(), user.getFechanacimiento(), user.getIdusuario());
+            UserLogged u = new UserLogged(user.getNombre(),user.getCorreo(),user.getRol(), user.getFechanacimiento(), user.getIdusuario(),user.getTemas());
             if(user.getRol()==Rol.COMENTARISTA){
                 
                 context.getExternalContext().getSessionMap().put("user", u);
@@ -77,13 +78,23 @@ public class ControladorSesion implements Serializable{
         private Rol rol;
         private Date fechanacimiento;
         private int idusuario;
+        private Set temas;
 
-        public UserLogged(String nombre, String correo, Rol rol,Date fechanacimiento,int idusuario) {
+        public UserLogged(String nombre, String correo, Rol rol,Date fechanacimiento,int idusuario,Set temas) {
             this.nombre = nombre;
             this.correo = correo;
             this.rol = rol;
             this.fechanacimiento=fechanacimiento;
             this.idusuario= idusuario;
+            this.temas=temas;
+        }
+
+        public Set getTemas() {
+            return temas;
+        }
+
+        public void setTemas(Set temas) {
+            this.temas = temas;
         }
 
         public int getIdusuario() {

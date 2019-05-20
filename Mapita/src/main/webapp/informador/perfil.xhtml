@@ -140,7 +140,7 @@ and open the template in the editor.
                                                 <p:outputLabel for="nombretema" value="Nombre tema:" />
                                                 <p:inputText  class="texto" id="nombretema" value="#{agregaTema.nombre}" required="true" placeholder="Nombre tema"  validatorMessage="Por favor ingresa nombre a tu tema" requiredMessage="Por favor ingresa nombre a tu tema"/> <br/>
                                                 <p:outputLabel for="colortema" value="Color tema:" />
-                                                <p:colorPicker id="colortema" value="#{agregaTema.color}" mode="popup" required="true"/><br/>
+                                                <p:colorPicker id="colortema" value="#{agregaTema.color}" mode="popup" required="true"  validatorMessage="Por favor escoge color a tu tema" requiredMessage="Por favor escoge color a tu tema"/><br/>
                                                 <p:commandButton action="#{agregaTema.agregaTema()}" value="enviar"/>
                                             </h:panelGrid>
                                         </h:form>
@@ -154,38 +154,58 @@ and open the template in the editor.
                     <div class="ui-g-12 ui-md-6 ui-lg-4"/>
                     <div class="ui-g-12 ui-md-6 ui-lg-4">
                         <h1><center>Temas</center></h1>
-                        <p:dataTable value="#{verTemas.resultado}" var="tema" paginator="true" paginatorPosition="bottom" rows="7">
-                        <p:column headerText="Nombre">
-                            <div class="ui-g">
-                                <div class="ui-g-12 ui-md-6 ui-lg-5">
-                                    <h:outputLink value="javascript:void(0)" onclick="PF('dlg5').show();" title="info">
-                                        <p:graphicImage name="/images/icono_info.png" width="20">
-                                        </p:graphicImage>
-                                    </h:outputLink>
-                                    <p:dialog header="Tema" widgetVar="dlg5" resizable="false" modal="true">
-                                        <h:panelGrid columns="2" cellpadding="5">
-                                            <h:form id="form" class="formulario">
-                                                <p:messages id="message" closable="true">
-                                                    <p:autoUpdate />
-                                                </p:messages>
-                                                <h:panelGrid columns="3" cellpadding="1">
-                                                    <p:outputLabel value="marcadores por tema" />
-                                                </h:panelGrid>
-                                            </h:form>
-                                        </h:panelGrid>
-                                    </p:dialog>
+                        <p:dataTable id="table" value="#{verTemas.resultado}" var="tema" paginator="true" paginatorPosition="bottom" rows="7">
+                            <p:column headerText="Nombre">
+                                <div class="ui-g">
+                                    <div class="ui-g-12 ui-md-6 ui-lg-5">
+                                        <h:outputLink value="javascript:void(0)" onclick="PF('dlg5').show();" title="info">
+                                            <p:graphicImage name="/images/icono_info.png" width="20">
+                                            </p:graphicImage>
+                                        </h:outputLink>
+                                        <p:dialog header="Tema" widgetVar="dlg5" resizable="false" modal="true">
+                                            <h:panelGrid columns="2" cellpadding="5">
+                                                <h:form id="form" class="formulario">
+                                                    <p:messages id="message" closable="true">
+                                                        <p:autoUpdate />
+                                                    </p:messages>
+                                                    <h:panelGrid columns="3" cellpadding="1">
+                                                        <p:outputLabel value="marcadores por tema" />
+                                                    </h:panelGrid>
+                                                </h:form>
+                                            </h:panelGrid>
+                                        </p:dialog>
+                                    </div>
+                                    <div class="ui-g-12 ui-md-6 ui-lg-4">
+                                        <h:outputText value="#{tema.nombre}" style="align-content:center"/>
+                                    </div>
                                 </div>
-                                <div class="ui-g-12 ui-md-6 ui-lg-4">
-                                    <h:outputText value="#{tema.nombre}" style="align-content:center"/>
-                                </div>
-                            </div>
-                        </p:column>
-                        <p:column headerText="Color">
-                            <center>
-                                <h:outputText value="#{tema.color}"/>
-                            </center>
-                        </p:column>
-                    </p:dataTable>
+                            </p:column>
+                            <p:column headerText="Color">
+                                <center>
+                                    <h:outputText value="#{tema.color}"/>
+                                </center>
+                            </p:column>
+                                <p:column width="20" >
+                                    <h:form>
+                                        <p:selectBooleanCheckbox value="#{tema.selected}">
+                                            <p:ajax update="table" listener="#{tema.selected}" />
+                                        </p:selectBooleanCheckbox>
+                                    </h:form>
+                                </p:column>
+                        </p:dataTable>
+                        <br/>
+                        <div class="ui-g-12 ui-md-4 ui-lg-9"/>
+                        <div class="ui-g-12 ui-md-2 ui-lg-2">
+                            <h:form>
+                                <p:commandButton value="Eliminar" action="#{verTemas.eliminarTemas()}" icon="ui-icon-trash" >
+                                    <p:confirm message="¿Seguro que quieres eliminar?" header="Aviso" icon="ui-icon-alert"/>
+                                </p:commandButton>
+                                <p:confirmDialog global="true">
+                                    <p:commandButton value="Si" type="button" icon="ui-icon-check" styleClass="ui-confirmdialog-yes"/>
+                                    <p:commandButton value="No" type="button" icon="ui-icon-close" styleClass="ui-confirmdialog-no"/>
+                                </p:confirmDialog>
+                            </h:form>
+                        </div>
                     </div>
                 </div>
             </div>

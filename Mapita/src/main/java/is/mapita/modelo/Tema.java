@@ -18,6 +18,7 @@ public class Tema  implements java.io.Serializable {
      private Usuario usuario;
      private String nombre;
      private String color;
+     private boolean selected;
      private Set marcadores = new HashSet(0);
 
     public Tema() {
@@ -37,6 +38,14 @@ public class Tema  implements java.io.Serializable {
         this.marcadores = marcadores;
     }
 
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+    
     public Set getMarcadores() {
         return marcadores;
     }
