@@ -14,6 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import org.primefaces.event.RowEditEvent;
 
 /**
  *
@@ -21,10 +22,54 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean
 @SessionScoped
-public class VerTemas {
+public class controladorTemas {
     private List<Tema> resultado;
     private List<Tema> eliminados;
+    private String nuevoColor;
+    private String nuevoNombre;
 
+    public String getNuevoNombre() {
+        return nuevoNombre;
+    }
+
+    public void setNuevoNombre(String nuevoNombre) {
+        this.nuevoNombre = nuevoNombre;
+    }
+
+    public List<Tema> getEliminados() {
+        return eliminados;
+    }
+
+    public void setEliminados(List<Tema> eliminados) {
+        this.eliminados = eliminados;
+    }
+
+    public String getNuevoColor() {
+        return nuevoColor;
+    }
+
+    public void setNuevoColor(String nuevoColor) {
+        this.nuevoColor = nuevoColor;
+    }
+    
+    public void actualizar(RowEditEvent event){
+        Tema tema = (Tema) event.getObject();
+        TemaDAO tdb= new TemaDAO();
+        if(nuevoColor==""){
+            nuevoColor=tema.getColor();
+        }
+        if(nuevoNombre==""){
+            nuevoNombre=tema.getNombre();
+        }
+        tema.setColor(nuevoColor);
+        tema.setNombre(nuevoNombre);
+        tdb.update(tema);
+    }
+    
+    public void cancelar(RowEditEvent event){
+        
+    }
+    
     public List<Tema> getResultado() {
         return resultado;
     }

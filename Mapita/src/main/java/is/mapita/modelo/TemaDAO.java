@@ -39,7 +39,7 @@ public class TemaDAO extends AbstractDAO<Tema>{
      */
     @Override
     public void update(Tema tema){
-        super.save(tema);
+        super.update(tema);
     }
     
     /**
