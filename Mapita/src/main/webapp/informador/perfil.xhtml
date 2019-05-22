@@ -141,6 +141,14 @@ and open the template in the editor.
                                                 <p:inputText  class="texto" id="nombretema" value="#{agregaTema.nombre}" required="true" placeholder="Nombre tema"  validatorMessage="Por favor ingresa nombre a tu tema" requiredMessage="Por favor ingresa nombre a tu tema"/> <br/>
                                                 <p:outputLabel for="colortema" value="Color tema:" />
                                                 <p:colorPicker id="colortema" value="#{agregaTema.color}" mode="popup" required="true"  validatorMessage="Por favor escoge color a tu tema" requiredMessage="Por favor escoge color a tu tema"/><br/>
+                                                <p:outputLabel for="longitud" value="Longitud: " />
+                                                <p:inputNumber class="texto" decimalPlaces="6" id="longitud" value="#{agregaTema.longitud}" required="true"/><br/>
+                                                <p:outputLabel for="latitud" value="Latitud: " />
+                                                <p:inputNumber  class="texto" id="latitud" decimalPlaces="6" value="#{agregaTema.latitud}" required="true"/><br/>
+                                                <p:outputLabel for="descripcion" value="Descripcion:" />
+                                                <p:inputText class="texto" id="descripcion" placeholder="Descripcion" value="${agregaTema.descripcion}"  required="true"/><br/>
+                                                <p:outputLabel for="icono" value="Icono:" />
+                                                <p:inputText class="texto" id="icono" placeholder="Icono" value="${agregaTema.icon}"  required="true"/><br/>
                                                 <p:commandButton action="#{agregaTema.agregaTema()}" value="enviar"/>
                                             </h:panelGrid>
                                         </h:form>
@@ -170,7 +178,7 @@ and open the template in the editor.
                                         <f:facet name="output">
                                             <div class="ui-g">
                                                 <div class="ui-g-12 ui-md-6 ui-lg-5">
-                                                    <h:outputLink value="javascript:void(0)" onclick="PF('dlg5').show();" title="info">
+                                                    <h:outputLink value="javascript:void" onclick="PF('dlg5').show();" title="info">
                                                         <p:graphicImage name="/images/icono_info.png" width="20">
                                                         </p:graphicImage>
                                                     </h:outputLink>
@@ -184,7 +192,7 @@ and open the template in the editor.
                                                                     <p:outputLabel for="longitud" value="Longitud: " />
                                                                 </div>
                                                                 <div class="ui-g-6">
-                                                                    <p:inputNumber class="texto" decimalPlaces="6" id="longitud" value="#{agregaMarcador.longitud}" required="true"/><br/>
+                                                                    <p:inputNumber class="texto" decimalPlaces="6" id="longitud" value="#{agregaTema.longitud}" required="true"/><br/>
                                                                 </div>
                                                             </div>
                                                             <div class="ui-g">
@@ -192,7 +200,7 @@ and open the template in the editor.
                                                                     <p:outputLabel for="latitud" value="Latitud: " />
                                                                 </div>
                                                                 <div class="ui-g-6">
-                                                                    <p:inputNumber  class="texto" id="latitud" decimalPlaces="6" value="#{agregaMarcador.latitud}" required="true"/><br/>
+                                                                    <p:inputNumber  class="texto" id="latitud" decimalPlaces="6" value="#{agregaTema.latitud}" required="true"/><br/>
                                                                 </div>
                                                             </div>
                                                             <div class="ui-g">
@@ -200,7 +208,7 @@ and open the template in the editor.
                                                                     <p:outputLabel for="descripcion" value="Descripcion:" />
                                                                 </div>
                                                                 <div class="ui-g-6">
-                                                                     <p:inputText class="texto" id="descripcion" placeholder="Descripcion" value="${agregaMarcador.descripcion}"  required="true"/><br/>
+                                                                     <p:inputText class="texto" id="descripcion" placeholder="Descripcion" value="${agregaTema.descripcion}"  required="true"/><br/>
                                                                 </div>
                                                             </div>
                                                             <div class="ui-g">
@@ -208,14 +216,14 @@ and open the template in the editor.
                                                                     <p:outputLabel for="icono" value="Icono:" />
                                                                 </div>
                                                                 <div class="ui-g-6">
-                                                                     <p:inputText class="texto" id="icono" placeholder="Icono" value="${agregaMarcador.icon}"  required="true"/><br/>
+                                                                     <p:inputText class="texto" id="icono" placeholder="Icono" value="${agregaTema.icon}"  required="true"/><br/>
                                                                 </div>
                                                             </div>
                                                             <div class="ui-g">
                                                                 <div class="ui-g-8"/>
                                                                 <div class="ui-g-4"/>
                                                                 <div class="ui-g-2">
-                                                                    <p:commandButton value="Agregar" action="#{agregaMarcador.agregaMarcador(tema.color,tema.nombre)}" ajax="true">
+                                                                    <p:commandButton value="Agregar" action="#{agregaTema.agregaMarcador()}" ajax="true">
                                                                         <p:confirm message="¿agregar marcador?" header="Aviso"/>
                                                                     </p:commandButton>
                                                                 </div>
