@@ -9,7 +9,7 @@
             <generator class="identity" />
         </id>
         <many-to-one name="tema" class="is.mapita.modelo.Tema" fetch="select">
-            <column name="usuarioid" />
+            <column name="temaid" />
         </many-to-one>
         <property name="descripcion" type="string">
             <column name="descripcion" not-null="true" />

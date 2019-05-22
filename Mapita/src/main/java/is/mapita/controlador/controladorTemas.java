@@ -9,11 +9,13 @@ import is.mapita.modelo.Tema;
 import is.mapita.modelo.TemaDAO;
 import is.mapita.modelo.Usuario;
 import is.mapita.modelo.UsuarioDAO;
+import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import static org.hibernate.type.TypeFactory.serializable;
 import org.primefaces.event.RowEditEvent;
 
 /**

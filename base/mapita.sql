@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS tema;
-
 DROP TABLE IF EXISTS marcador;
+
+DROP TABLE IF EXISTS tema;
 
 DROP TABLE IF EXISTS usuario;
 
@@ -13,16 +13,6 @@ CREATE TABLE usuario (
   rol text NOT NULL
 );
 
-CREATE TABLE marcador (
-  idmarcador serial NOT NULL,
-  descripcion text NOT NULL,
-  longitud double precision NOT NULL,
-  latitud double precision NOT NULL,
-  icon text NOT NULL,
-  PRIMARY KEY (idmarcador),
-  usuarioid integer REFERENCES usuario(idusuario) ON DELETE CASCADE
-);
-
 CREATE TABLE tema (
   idtema serial NOT NULL,
   nombre text NOT NULL,
@@ -30,3 +20,16 @@ CREATE TABLE tema (
   PRIMARY KEY (idtema),
   usuarioid integer REFERENCES usuario(idusuario) ON DELETE CASCADE
 );
+
+CREATE TABLE marcador (
+  idmarcador serial NOT NULL,
+  descripcion text NOT NULL,
+  longitud double precision NOT NULL,
+  latitud double precision NOT NULL,
+  icon text NOT NULL,
+  PRIMARY KEY (idmarcador),
+  temaid integer REFERENCES tema(idtema) ON DELETE CASCADE
+);
+
+INSERT INTO usuario(nombre,correo,contrasenia,fechanacimiento,rol)
+       VALUES ('adolfo','adolfo@gmail.com','1234','1994-12-16','ADMINISTRADOR'),('ada','ada@gmail.com','1234','2018-08-04','INFORMADOR'),('juan','juan@gmail.com','1234','1994-12-16','COMENTARISTA')

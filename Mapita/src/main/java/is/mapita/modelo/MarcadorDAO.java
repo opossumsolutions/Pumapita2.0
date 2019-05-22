@@ -39,7 +39,7 @@ public class MarcadorDAO extends AbstractDAO<Marcador>{
      */
     @Override
     public void update(Marcador marcador){
-        super.save(marcador);
+        super.update(marcador);
     }
     
     /**

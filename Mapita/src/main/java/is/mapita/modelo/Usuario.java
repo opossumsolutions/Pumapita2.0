@@ -20,6 +20,7 @@ public class Usuario  implements java.io.Serializable {
      private Rol rol;
      private boolean selected;
      private Set temas = new HashSet(0);
+     private Set marcadores = new HashSet(0);
 
     public Usuario() {
     }
@@ -32,16 +33,25 @@ public class Usuario  implements java.io.Serializable {
         this.contrasenia = contrasenia;
         this.rol =rol;
     }
-    public Usuario(int idusuario, String nombre, String correo, String contrasenia, Date fechanacimiento,Rol rol,Set temas) {
+    public Usuario(int idusuario, String nombre, String correo, String contrasenia, Date fechanacimiento,Rol rol,Set temas,Set marcadores) {
        this.idusuario = idusuario;
        this.nombre = nombre;
        this.correo = correo;
        this.contrasenia = contrasenia;
        this.fechanacimiento = fechanacimiento;
        this.temas = temas;
+       this.marcadores = marcadores;
        this.rol =rol;
     }
 
+    public Set getMarcadores() {
+        return marcadores;
+    }
+
+    public void setMarcadores(Set marcadores) {
+        this.marcadores = marcadores;
+    }
+    
     public Set getTemas() {
         return temas;
     }

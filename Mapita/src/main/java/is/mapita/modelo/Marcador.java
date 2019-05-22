@@ -12,7 +12,6 @@ package is.mapita.modelo;
 public class Marcador  implements java.io.Serializable {
 
      private int idmarcador;
-     private Usuario usuario;
      private Tema tema;
      private String descripcion;
      private double longitud;
@@ -30,9 +29,9 @@ public class Marcador  implements java.io.Serializable {
         this.icon = icon;
     }
 
-    public Marcador(int idmarcador, Usuario usuario, String descripcion, double longitud, double latitud, String icon) {
+    public Marcador(int idmarcador, Tema tema, String descripcion, double longitud, double latitud, String icon) {
         this.idmarcador = idmarcador;
-        this.usuario = usuario;
+        this.tema = tema;
         this.descripcion = descripcion;
         this.longitud = longitud;
         this.latitud = latitud;
@@ -46,15 +45,7 @@ public class Marcador  implements java.io.Serializable {
     public void setIdmarcador(int idmarcador) {
         this.idmarcador = idmarcador;
     }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
+    
     public String getDescripcion() {
         return descripcion;
     }

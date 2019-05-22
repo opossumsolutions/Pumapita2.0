@@ -18,7 +18,7 @@
         </property>
         <set name="marcadores" table="marcador" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="usuarioid" />
+                <column name="temaid" />
             </key>
             <one-to-many class="is.mapita.modelo.Marcador" />
         </set>

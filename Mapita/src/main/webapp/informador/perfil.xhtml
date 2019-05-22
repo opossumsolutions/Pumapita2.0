@@ -174,17 +174,65 @@ and open the template in the editor.
                                                         <p:graphicImage name="/images/icono_info.png" width="20">
                                                         </p:graphicImage>
                                                     </h:outputLink>
-                                                    <p:dialog header="Tema" widgetVar="dlg5" resizable="false" modal="true">
-                                                        <h:panelGrid columns="2" cellpadding="5">
-                                                            <h:form id="form" class="formulario">
-                                                                <p:messages id="message" closable="true">
-                                                                    <p:autoUpdate />
-                                                                </p:messages>
-                                                                <h:panelGrid columns="3" cellpadding="1">
-                                                                    <p:outputLabel value="marcadores por tema" />
-                                                                </h:panelGrid>
-                                                            </h:form>
-                                                        </h:panelGrid>
+                                                    <p:dialog header="Agrega Marcador" widgetVar="dlg5" resizable="false" modal="true">
+                                                        <h:form>
+                                                            <p:messages id="message" closable="true">
+                                                                <p:autoUpdate />
+                                                            </p:messages>
+                                                            <div class="ui-g">
+                                                                <div class="ui-g-4">
+                                                                    <p:outputLabel for="longitud" value="Longitud: " />
+                                                                </div>
+                                                                <div class="ui-g-6">
+                                                                    <p:inputNumber class="texto" decimalPlaces="6" id="longitud" value="#{agregaMarcador.longitud}" required="true"/><br/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ui-g">
+                                                                <div class="ui-g-4">
+                                                                    <p:outputLabel for="latitud" value="Latitud: " />
+                                                                </div>
+                                                                <div class="ui-g-6">
+                                                                    <p:inputNumber  class="texto" id="latitud" decimalPlaces="6" value="#{agregaMarcador.latitud}" required="true"/><br/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ui-g">
+                                                                <div class="ui-g-4">
+                                                                    <p:outputLabel for="descripcion" value="Descripcion:" />
+                                                                </div>
+                                                                <div class="ui-g-6">
+                                                                     <p:inputText class="texto" id="descripcion" placeholder="Descripcion" value="${agregaMarcador.descripcion}"  required="true"/><br/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ui-g">
+                                                                <div class="ui-g-4">
+                                                                    <p:outputLabel for="icono" value="Icono:" />
+                                                                </div>
+                                                                <div class="ui-g-6">
+                                                                     <p:inputText class="texto" id="icono" placeholder="Icono" value="${agregaMarcador.icon}"  required="true"/><br/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="ui-g">
+                                                                <div class="ui-g-8"/>
+                                                                <div class="ui-g-4"/>
+                                                                <div class="ui-g-2">
+                                                                    <p:commandButton value="Agregar" action="#{agregaMarcador.agregaMarcador(tema.color,tema.nombre)}" ajax="true">
+                                                                        <p:confirm message="¿agregar marcador?" header="Aviso"/>
+                                                                    </p:commandButton>
+                                                                </div>
+                                                                <p:confirmDialog global="true">
+                                                                    <div class="ui-g">
+                                                                        <div class="ui-g-1"/>
+                                                                        <div class="ui-g-4">
+                                                                          <p:commandButton value="Si" type="button" icon="ui-icon-check" styleClass="ui-confirmdialog-yes"/>  
+                                                                        </div>
+                                                                        <div class="ui-g-2"/>
+                                                                        <div class="ui-g-4">
+                                                                        <p:commandButton value="No" type="button" icon="ui-icon-close" styleClass="ui-confirmdialog-no"/>
+                                                                        </div>
+                                                                    </div>
+                                                                </p:confirmDialog>   
+                                                            </div>
+                                                        </h:form>
                                                     </p:dialog>
                                                 </div>
                                                 <div class="ui-g-12 ui-md-6 ui-lg-4">
