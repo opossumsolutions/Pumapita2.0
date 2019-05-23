@@ -124,9 +124,6 @@ public class AgregaTema {
             Mensajes.fatal("Ya existe un marcador con estas cordenadas \n" +"Lat: "+this.latitud +" Lng: "+this.longitud);
             return "";
         }
-        UsuarioDAO udb = new UsuarioDAO();
-        ControladorSesion.UserLogged us= (ControladorSesion.UserLogged) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
-        Usuario u = udb.buscaPorCorreo(us.getCorreo());
         m = new Marcador();
         Tema t = tdb.buscaTemaPorNombre(nombre);
         m.setDescripcion(descripcion);
@@ -137,11 +134,6 @@ public class AgregaTema {
         mdb.save(m);
         this.descripcion ="";
         Mensajes.info("Se guardo el tema");
-        ControladorSesion cs =new ControladorSesion();
-        cs.setContrasenia(u.getContrasenia());
-        cs.setCorreo(u.getCorreo());
-        cs.logout();
-        cs.login();
         return "/informador/perfil?faces-redirect=true";
     }
 }
