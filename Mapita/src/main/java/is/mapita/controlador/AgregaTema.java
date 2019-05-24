@@ -130,6 +130,10 @@ public class AgregaTema {
         TemaDAO tdb =new TemaDAO();
         UsuarioDAO udb = new UsuarioDAO();
         Tema t = tdb.buscaTemaPorNombre(nombre);
+        if(color ==null){
+            Mensajes.fatal("No has asignado un color \n");
+            return "";
+        }
         if(t!= null){
             Mensajes.fatal("Ya existe un tema con este nombre \n");
             return "";
@@ -148,12 +152,12 @@ public class AgregaTema {
         t.setNombre(nombre);
         t.setColor(color);
         t.setUsuario(u);
+        this.creaIcono(t.getColor(),50,50);
+        t.setIcon("resources/images/"+t.getColor()+".svg");
         tdb.save(t);
         m.setDescripcion(descripcion);
         m.setLatitud(latitud);
         m.setLongitud(longitud);
-        this.creaIcono(t.getColor(),50,50);
-        m.setIcon("resources/images/"+t.getColor()+".svg");
         m.setTema(t);
         mdb.save(m);
         Mensajes.info("Se guardo el tema");
@@ -238,8 +242,6 @@ public class AgregaTema {
         m.setDescripcion(descripcion);
         m.setLatitud(latitud);
         m.setLongitud(longitud);
-        this.creaIcono(t.getColor(),50,50);
-        m.setIcon("resources/images/"+t.getColor()+".svg");
         m.setTema(t);
         mdb.save(m);
         this.descripcion ="";

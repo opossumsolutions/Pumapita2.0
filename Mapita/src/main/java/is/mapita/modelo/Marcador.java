@@ -16,32 +16,38 @@ public class Marcador  implements java.io.Serializable {
      private String descripcion;
      private double longitud;
      private double latitud;
-     private String icon;
+     private boolean selected;
 
     public Marcador() {
     }
 
-    public Marcador(int idmarcador, String descripcion, double longitud, double latitud, String icon) {
+    public Marcador(int idmarcador, String descripcion, double longitud, double latitud) {
         this.idmarcador = idmarcador;
         this.descripcion = descripcion;
         this.longitud = longitud;
         this.latitud = latitud;
-        this.icon = icon;
     }
 
-    public Marcador(int idmarcador, Tema tema, String descripcion, double longitud, double latitud, String icon) {
+    public Marcador(int idmarcador, Tema tema, String descripcion, double longitud, double latitud) {
         this.idmarcador = idmarcador;
         this.tema = tema;
         this.descripcion = descripcion;
         this.longitud = longitud;
         this.latitud = latitud;
-        this.icon = icon;
     }
 
     public int getIdmarcador() {
         return idmarcador;
     }
 
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+    
     public void setIdmarcador(int idmarcador) {
         this.idmarcador = idmarcador;
     }
@@ -68,14 +74,6 @@ public class Marcador  implements java.io.Serializable {
 
     public void setLatitud(double latitud) {
         this.latitud = latitud;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
     }
 
     public Tema getTema() {

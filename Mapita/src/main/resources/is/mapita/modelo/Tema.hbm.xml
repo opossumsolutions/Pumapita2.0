@@ -16,6 +16,9 @@
         <property name="color" type="string">
             <column name="color" not-null="true" />
         </property>
+        <property name="icon" type="string">
+            <column name="icon" />
+        </property>
         <set name="marcadores" table="marcador" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="temaid" />

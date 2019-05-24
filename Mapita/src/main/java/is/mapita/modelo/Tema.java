@@ -18,24 +18,28 @@ public class Tema  implements java.io.Serializable {
      private Usuario usuario;
      private String nombre;
      private String color;
+     private String icon;
      private boolean selected;
      private Set marcadores = new HashSet(0);
 
     public Tema() {
     }
 
-    public Tema(int idtema, String nombre, String color) {
+    public Tema(int idtema, String nombre, String color, String icon) {
         this.idtema = idtema;
         this.nombre = nombre;
         this.color = color;
+        this.icon = icon;
     }
 
-    public Tema(int idtema, Usuario usuario, String nombre, String color,Set marcadores) {
+    public Tema(int idtema, Usuario usuario, String nombre, String color,Set marcadores, String icon) {
         this.idtema = idtema;
         this.usuario = usuario;
         this.nombre = nombre;
         this.color = color;
+        this.icon = icon;
         this.marcadores = marcadores;
+        
     }
 
     public boolean isSelected() {
@@ -54,6 +58,13 @@ public class Tema  implements java.io.Serializable {
         this.marcadores = marcadores;
     }
     
+        public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
     public int getIdtema() {
         return idtema;
