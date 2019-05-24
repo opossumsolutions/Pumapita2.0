@@ -84,14 +84,14 @@ public class AgregaUsuario {
                 u.setRol(Rol.COMENTARISTA);
             }else if(usuario.equals("informador")){
                 SecureRandom random = new SecureRandom();
-                String random1 = new BigInteger(30, random).toString(32);
+                String random1 = new BigInteger(20, random).toString(32);
                 nombre="user"+random1;
                 u.setNombre(nombre);
-                String random2=new BigInteger(130, random).toString(32);
+                String random2=new BigInteger(20, random).toString(32);
                 u.setContrasenia(random2);
                 u.setRol(Rol.INFORMADOR);
                 Mail email = new Mail();
-                email.sendMail("Registro mapita","tu contraseña es: "+random2+"\nTu nombre de usuario aleatorio es: "+random1,correo+"");
+                email.sendMail("Registro mapita","tu contraseña es: "+random2+"\nTu nombre de usuario aleatorio es: "+nombre,correo+"");
             }else {
                 u.setRol(Rol.ADMINISTRADOR);
             }

@@ -13,8 +13,10 @@ and open the template in the editor.
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <f:view>
         <h:head>
-            <title>Inicio</title>
+            <title>Perfil</title>
             <h:outputStylesheet name="css/estilos.css"/>
+            <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4P49Z6FjBZt6bWNfwk0aaRxKjsOmJc2Y">
+            </script>
         </h:head>
         <h:body>
             
@@ -125,95 +127,138 @@ and open the template in the editor.
                             </h:form>
                         </div>
                         <div class="ui-g-12 ui-md-6 ui-lg-3">
-                            <h:form>        
-                                <h:outputLink value="javascript:void(0)" onclick="PF('dlg4').show();" title="nuevo tema">
-                                    <p:graphicImage name="/images/tema.png" width="50">
-                                    </p:graphicImage>
-                                </h:outputLink>
-                                <p:dialog header="Tema" widgetVar="dlg4" resizable="false" modal="true">
-                                    <h:panelGrid columns="2" cellpadding="5">
-                                        <h:form id="form" class="formulario">
-                                            <p:messages id="message" closable="true">
-                                                <p:autoUpdate />
-                                            </p:messages>
-                                            <h:panelGrid columns="3" cellpadding="5">
-                                                <p:outputLabel for="nombretema" value="Nombre tema:" />
-                                                <p:inputText  class="texto" id="nombretema" value="#{agregaTema.nombre}" required="true" placeholder="Nombre tema"  validatorMessage="Por favor ingresa nombre a tu tema" requiredMessage="Por favor ingresa nombre a tu tema"/> <br/>
-                                                <p:outputLabel for="colortema" value="Color tema:" />
-                                                <p:colorPicker id="colortema" value="#{agregaTema.color}" mode="popup" required="true"  validatorMessage="Por favor escoge color a tu tema" requiredMessage="Por favor escoge color a tu tema"/><br/>
-                                                <p:outputLabel for="longitud" value="Longitud: " />
-                                                <p:inputNumber class="texto" decimalPlaces="6" id="longitud" value="#{agregaTema.longitud}" required="true"/><br/>
-                                                <p:outputLabel for="latitud" value="Latitud: " />
-                                                <p:inputNumber  class="texto" id="latitud" decimalPlaces="6" value="#{agregaTema.latitud}" required="true"/><br/>
-                                                <p:outputLabel for="descripcion" value="Descripcion:" />
-                                                <p:inputText class="texto" id="descripcion" placeholder="Descripcion" value="${agregaTema.descripcion}"  required="true"/><br/>
-                                                <p:outputLabel for="icono" value="Icono:" />
-                                                <p:inputText class="texto" id="icono" placeholder="Icono" value="${agregaTema.icon}"  required="true"/><br/>
-                                                <p:commandButton action="#{agregaTema.agregaTema()}" value="enviar"/>
-                                            </h:panelGrid>
-                                        </h:form>
-                                    </h:panelGrid>
-                                </p:dialog>    
-                            </h:form>
+                            <h:outputLink value="javascript:void" onclick="PF('dlg4').show();" title="agrega Tema">
+                                <p:graphicImage name="/images/tema.png" width="50"/>
+                            </h:outputLink>
+                            <p:dialog header="Agrega Tema" widgetVar="dlg4" resizable="false" modal="true" width="1000" >
+                                <panel>
+                                <h:form id="form3"  >
+                                    <p:messages id="message" closable="true">
+                                        <p:autoUpdate />
+                                    </p:messages>
+                                    <div class="ui-g">
+                                        <div class="ui-g-7">
+                                            <p:gmap  draggable="false"  mapTypeControl="false" center="23.382390, -102.291477" style="width:100%; height:400px"  zoom="5" type="HYBRID" id="mapa" model="#{agregaTema.simpleModel}">
+                                                <p:ajax event="markerDrag" listener="#{agregaTema.onMarkerDrag}" update="form3"/>
+                                                <p:ajax event="pointSelect" listener="#{agregaTema.onPointSelect}" update="form3 mapa"/>
+                                            </p:gmap>
+                                        </div>
+                                        <div class="ui-g-5">
+                                            <div class="ui-g">
+                                                <div class="ui-g-4">
+                                                    <p:outputLabel for="Nombre" value="Nombre tema: " />
+                                                </div>
+                                                <div class="ui-g-6">
+                                                    <p:inputText class="texto" id="Nombre" value="#{agregaTema.nombre}" required="true"/><br/>
+                                                </div>
+                                            </div>
+                                            <div class="ui-g">
+                                                <div class="ui-g-4">
+                                                    <p:outputLabel for="Color" value="Color: " />
+                                                </div>
+                                                <div class="ui-g-6">
+                                                    <p:colorPicker id="Color" value="#{agregaTema.color}" mode="popup" required="true"/><br/>
+                                                </div>
+                                            </div>
+                                            <div class="ui-g">
+                                                <div class="ui-g-4">
+                                                    <p:outputLabel for="longitud" value="Longitud: " />
+                                                </div>
+                                                <div class="ui-g-6">
+                                                    <p:inputNumber class="texto" decimalPlaces="6" id="longitud" value="#{agregaTema.longitud}" required="true"/><br/>
+                                                </div>
+                                            </div>
+                                            <div class="ui-g">
+                                                <div class="ui-g-4">
+                                                    <p:outputLabel for="latitud" value="Latitud: " />
+                                                </div>
+                                                <div class="ui-g-6">
+                                                    <p:inputNumber  class="texto" id="latitud" decimalPlaces="6" value="#{agregaTema.latitud}" required="true"/><br/>
+                                                </div>
+                                            </div>
+                                            <div class="ui-g">
+                                                <div class="ui-g-4">
+                                                    <p:outputLabel for="descripcion" value="Descripcion:" />
+                                                </div>
+                                                <div class="ui-g-6">
+                                                    <p:inputText class="texto" id="descripcion" placeholder="Descripcion" value="${agregaTema.descripcion}"  required="true"/><br/>
+                                                </div>
+                                            </div>
+                                            <div class="ui-g">
+                                                <div class="ui-g-8"/>
+                                                <div class="ui-g-4"/>
+                                                <div class="ui-g-2">
+                                                    <p:commandButton value="Agregar" action="#{agregaTema.agregaTema()}"/>
+                                                </div>       
+                                            </div>
+                                        </div>
+                                    </div>
+                                </h:form>
+                                </panel>
+                            </p:dialog>
                         </div>
                         <div class="ui-g-12 ui-md-6 ui-lg-3">
                             <h:outputLink value="javascript:void" onclick="PF('dlg5').show();" title="agrega Marcador">
                                 <p:graphicImage name="/images/marcador.png" width="35"/>
                             </h:outputLink>
-                            <p:dialog header="Agrega Marcador" widgetVar="dlg5" resizable="false" modal="true">
-                                <h:form>
+                            <p:dialog header="Agrega Marcador" widgetVar="dlg5" resizable="false" modal="true" width="1000" >
+                                <panel>
+                                <h:form id="form"  >
                                     <p:messages id="message" closable="true">
                                         <p:autoUpdate />
                                     </p:messages>
                                     <div class="ui-g">
-                                        <div class="ui-g-4">
-                                            <p:outputLabel for="Nombre" value="Nombre tema: " />
+                                        <div class="ui-g-7">
+                                            <p:gmap  draggable="false"  mapTypeControl="false" center="23.382390, -102.291477" style="width:100%; height:400px"  zoom="5" type="HYBRID" id="mapa" model="#{agregaTema.simpleModel}">
+                                                <p:ajax event="markerDrag" listener="#{agregaTema.onMarkerDrag}" update="form"/>
+                                                <p:ajax event="pointSelect" listener="#{agregaTema.onPointSelect}" update="form mapa"/>
+                                            </p:gmap>
                                         </div>
-                                        <div class="ui-g-6">
-                                            <p:inputText class="texto" id="Nombre" value="#{agregaTema.nombre}" required="true"/><br/>
+                                        <div class="ui-g-5">
+                                            <div class="ui-g">
+                                                <div class="ui-g-4">
+                                                    <p:outputLabel for="Nombre" value="Nombre tema: " />
+                                                </div>
+                                                <div class="ui-g-6">
+                                                    <p:inputText class="texto" id="Nombre" value="#{agregaTema.nombre}" required="true"/><br/>
+                                                </div>
+                                            </div>
+                                            <div class="ui-g">
+                                                <div class="ui-g-4">
+                                                    <p:outputLabel for="longitud" value="Longitud: " />
+                                                </div>
+                                                <div class="ui-g-6">
+                                                    <p:inputNumber class="texto" decimalPlaces="6" id="longitud" value="#{agregaTema.longitud}" required="true"/><br/>
+                                                </div>
+                                            </div>
+                                            <div class="ui-g">
+                                                <div class="ui-g-4">
+                                                    <p:outputLabel for="latitud" value="Latitud: " />
+                                                </div>
+                                                <div class="ui-g-6">
+                                                    <p:inputNumber  class="texto" id="latitud" decimalPlaces="6" value="#{agregaTema.latitud}" required="true"/><br/>
+                                                </div>
+                                            </div>
+                                            <div class="ui-g">
+                                                <div class="ui-g-4">
+                                                    <p:outputLabel for="descripcion" value="Descripcion:" />
+                                                </div>
+                                                <div class="ui-g-6">
+                                                    <p:inputText class="texto" id="descripcion" placeholder="Descripcion" value="${agregaTema.descripcion}"  required="true"/><br/>
+                                                </div>
+                                            </div>
+                                            <div class="ui-g">
+                                                <div class="ui-g-8"/>
+                                                <div class="ui-g-4"/>
+                                                <div class="ui-g-2">
+                                                    <p:commandButton value="Agregar" action="#{agregaTema.agregaMarcador()}"/>
+                                                </div>       
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="ui-g">
-                                        <div class="ui-g-4">
-                                            <p:outputLabel for="longitud" value="Longitud: " />
-                                        </div>
-                                        <div class="ui-g-6">
-                                            <p:inputNumber class="texto" decimalPlaces="6" id="longitud" value="#{agregaTema.longitud}" required="true"/><br/>
-                                        </div>
-                                    </div>
-                                    <div class="ui-g">
-                                        <div class="ui-g-4">
-                                            <p:outputLabel for="latitud" value="Latitud: " />
-                                        </div>
-                                        <div class="ui-g-6">
-                                            <p:inputNumber  class="texto" id="latitud" decimalPlaces="6" value="#{agregaTema.latitud}" required="true"/><br/>
-                                        </div>
-                                    </div>
-                                    <div class="ui-g">
-                                        <div class="ui-g-4">
-                                            <p:outputLabel for="descripcion" value="Descripcion:" />
-                                        </div>
-                                        <div class="ui-g-6">
-                                            <p:inputText class="texto" id="descripcion" placeholder="Descripcion" value="${agregaTema.descripcion}"  required="true"/><br/>
-                                        </div>
-                                    </div>
-                                    <div class="ui-g">
-                                        <div class="ui-g-4">
-                                            <p:outputLabel for="icono" value="Icono:" />
-                                        </div>
-                                        <div class="ui-g-6">
-                                            <p:inputText class="texto" id="icono" placeholder="Icono" value="${agregaTema.icon}"  required="true"/><br/>
-                                        </div>
-                                    </div>
-                                    <div class="ui-g">
-                                        <div class="ui-g-8"/>
-                                        <div class="ui-g-4"/>
-                                        <div class="ui-g-2">
-                                            <p:commandButton value="Agregar" action="#{agregaTema.agregaMarcador()}"/>
-                                        </div>       
                                     </div>
                                 </h:form>
-                           </p:dialog>
+                                </panel>
+                            </p:dialog>
                         </div>
                     </div>
                 </div>
@@ -222,9 +267,12 @@ and open the template in the editor.
                     <div class="ui-g-12 ui-md-6 ui-lg-4">
                         <h:form id="table">
                             <h1><center>Temas</center></h1>
-                            <p:dataTable value="#{controladorTemas.resultado}" var="tema" paginator="true" paginatorPosition="bottom" rows="7" editable="true">
+                            <p:dataTable value="#{controladorTemas.resultado}" emptyMessage="No hay temas" var="tema" paginator="true" paginatorPosition="bottom" rows="7" editable="true">
                                 <p:ajax event="rowEdit" listener="#{controladorTemas.actualizar}"/>
                                 <p:ajax event="rowEditCancel" listener="#{controladorTemas.cancelar}"/>
+                                <p:column style="width:16px">
+                                    <p:rowToggler />
+                                </p:column>
                                 <p:column width="20" >
                                     <h:form>
                                         <p:selectBooleanCheckbox value="#{tema.selected}">
@@ -259,6 +307,39 @@ and open the template in the editor.
                                 <p:column width="15">
                                     <p:rowEditor/>
                                 </p:column>
+                                <p:rowExpansion>
+                                    <p:repeat value="#{controladorMarcadores.marcadoresPorTema(tema.nombre)}" var="marcador">
+                                        <div class="ui-g">
+                                            <div class="ui-g-10">
+                                                <center>
+                                                    <h:outputText value="Latitud:" />
+                                                    <h:outputText value="#{marcador.latitud}" style="font-weight: bold"/><br/>
+
+                                                    <h:outputText value="Longitud:" />
+                                                    <h:outputText value="#{marcador.longitud}" style="font-weight: bold"/><br/>
+
+                                                    <h:outputText value="Descripcion:" />
+                                                    <h:outputText value="#{marcador.descripcion}" style="font-weight: bold"/><br/>
+                                                </center>
+                                                
+                                            </div>
+                                            <div class="ui-g-2">
+                                                <h:form id="form3">
+                                                    <h:outputLink value="javascript:void(0)" onclick="PF('dlg6').show();" title="edit marcador">
+                                                        <p:graphicImage name="/images/editMarcador.png" width="60">
+                                                        </p:graphicImage>
+                                                    </h:outputLink>
+                                                    <p:dialog header="Edita Marcador" widgetVar="dlg6" resizable="false"  modal="true">
+                                                        <h:panelGrid columns="2" cellpadding="5">
+                                                            
+                                                        </h:panelGrid>
+                                                    </p:dialog> 
+                                                </h:form>
+                                            </div>
+                                        </div>
+                                        <br/>
+                                    </p:repeat>
+                                </p:rowExpansion>
                             </p:dataTable>
                         </h:form>
                         <br/>
@@ -277,6 +358,7 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
+                    
             <footer>
                 <ui:insert name="footer" >
 		  <ui:include src="/template/footer.xhtml" />

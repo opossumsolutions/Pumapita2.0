@@ -5,6 +5,8 @@
  */
 package is.mapita.controlador;
 
+import is.mapita.modelo.Marcador;
+import is.mapita.modelo.MarcadorDAO;
 import is.mapita.modelo.Tema;
 import is.mapita.modelo.TemaDAO;
 import is.mapita.modelo.Usuario;
