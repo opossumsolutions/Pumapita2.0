@@ -12,6 +12,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
@@ -27,6 +28,8 @@ import org.primefaces.model.map.Marker;
 public class VerMarcadores implements Serializable{
     
     private MapModel simpleModel;
+    
+    private MapModel userModel;
     
     private Marker marker;
     
@@ -46,11 +49,15 @@ public class VerMarcadores implements Serializable{
         }
     }
     
-    public void verMarcador(Marcador marcador1){
-        LatLng cord = new LatLng(marcador1.getLatitud(),marcador1.getLongitud());
+    public MapModel verMarcador(double lat, double lng){
+        simpleModel = new DefaultMapModel();
+        LatLng cord = new LatLng(lat,lng);
+        MarcadorDAO mdb = new MarcadorDAO();
+        Marcador marcador1 = mdb.buscaMarcadorPorLatLng(lat, lng);
         Marker marcador = new Marker(cord,marcador1.getTema().getNombre(),marcador1.getDescripcion());
-        marcador.setIcon(marcador1.getTema().getIcon());       
+        marcador.setIcon("../resources/images/"+marcador1.getTema().getColor()+".svg");
         simpleModel.addOverlay(marcador);
+        return simpleModel;
     }
     
     public MapModel getSimpleModel() {

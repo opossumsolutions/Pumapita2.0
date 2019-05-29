@@ -9,6 +9,8 @@ import is.mapita.modelo.Marcador;
 import is.mapita.modelo.MarcadorDAO;
 import is.mapita.modelo.Tema;
 import is.mapita.modelo.TemaDAO;
+import is.mapita.modelo.Usuario;
+import is.mapita.modelo.UsuarioDAO;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -54,5 +56,26 @@ public class ControladorMarcadores {
         MarcadorDAO mdb = new MarcadorDAO();
         resultadoMarcador = mdb.ObtenMarcadoresPorTema(nombre);
         return resultadoMarcador;
+    }
+    
+    public String eliminarMarcador(double lat, double lng){
+        MarcadorDAO mdb = new MarcadorDAO();
+        Marcador m = mdb.buscaMarcadorPorLatLng(lat, lng);
+        mdb.delete(m);
+        List <Marcador> marcadores = mdb.ObtenMarcadoresPorTema(m.getTema().getNombre());
+        if(marcadores.isEmpty()){
+            TemaDAO tdb = new TemaDAO();
+            Tema t = tdb.buscaTemaPorNombre(m.getTema().getNombre());
+            tdb.delete(t);
+        }
+        UsuarioDAO udb = new UsuarioDAO();
+        ControladorSesion.UserLogged us= (ControladorSesion.UserLogged) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
+        Usuario u = udb.buscaPorCorreo(us.getCorreo());
+        ControladorSesion cs =new ControladorSesion();
+        cs.setContrasenia(u.getContrasenia());
+        cs.setCorreo(u.getCorreo());
+        cs.logout();
+        cs.login();
+        return "/informador/perfil?faces-redirect=true";
     }
 }

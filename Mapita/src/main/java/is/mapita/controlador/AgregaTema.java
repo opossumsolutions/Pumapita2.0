@@ -17,6 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -94,8 +95,6 @@ public class AgregaTema {
     public void init(){
         simpleModel = new DefaultMapModel();
         marcador = new Marker(new LatLng(23.382390, -102.291477),"Arrastrame");
-        marcador.setDraggable(true);
-//        marcador.setClickable(true);
         simpleModel.addOverlay(marcador);
         this.latitud = marcador.getLatlng().getLat();
         this.longitud = marcador.getLatlng().getLng();
@@ -110,9 +109,11 @@ public class AgregaTema {
     }
     
     public void onMarkerDrag(MarkerDragEvent event){
-        marcador = event.getMarker();
-        this.latitud = marcador.getLatlng().getLat();
-        this.longitud = marcador.getLatlng().getLng();
+        LatLng latlng = event.getMarker().getLatlng();
+        marcador = simpleModel.getMarkers().get(0);
+        marcador.setLatlng(latlng);
+        this.latitud = latlng.getLat();
+        this.longitud = latlng.getLng();
     }
 
     public void onPointSelect(PointSelectEvent event) {
@@ -124,7 +125,15 @@ public class AgregaTema {
         
     }
     
-    
+    public MapModel marcadoresMapa(double latitud, double longitud){
+        simpleModel = new DefaultMapModel();
+        marcador = new Marker(new LatLng(latitud, longitud),"Arrastrame");
+        marcador.setDraggable(true);
+        simpleModel.addOverlay(marcador);
+        this.latitud = marcador.getLatlng().getLat();
+        this.longitud = marcador.getLatlng().getLng();
+        return simpleModel;
+    }
     
     public String agregaTema(){
         TemaDAO tdb =new TemaDAO();
@@ -246,6 +255,10 @@ public class AgregaTema {
         mdb.save(m);
         this.descripcion ="";
         Mensajes.info("Se guardo el tema");
+        return "/informador/perfil?faces-redirect=true";
+    }
+    
+    public String editaMarcador(){
         return "/informador/perfil?faces-redirect=true";
     }
 }

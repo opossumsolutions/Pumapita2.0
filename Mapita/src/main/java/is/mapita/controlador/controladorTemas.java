@@ -16,14 +16,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
-import static org.hibernate.type.TypeFactory.serializable;
 import org.primefaces.event.RowEditEvent;
 
 /**
@@ -34,10 +32,19 @@ import org.primefaces.event.RowEditEvent;
 @SessionScoped
 public class controladorTemas {
     private List<Tema> resultado;
+    private List<Marcador> resultadoMarcadores;
     private List<Tema> eliminados;
     private String nuevoColor;
     private String nuevoNombre;
 
+    public List<Marcador> getResultadoMarcadores() {
+        return resultadoMarcadores;
+    }
+
+    public void setResultadoMarcadores(List<Marcador> resultadoMarcadores) {
+        this.resultadoMarcadores = resultadoMarcadores;
+    }
+    
     public String getNuevoNombre() {
         return nuevoNombre;
     }
@@ -97,9 +104,12 @@ public class controladorTemas {
     @PostConstruct
     public void init() {
         TemaDAO tdb = new TemaDAO();
+        MarcadorDAO mdb = new MarcadorDAO();
         ControladorSesion.UserLogged us= (ControladorSesion.UserLogged) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("user");
         resultado = tdb.buscaPorUsuario(us.getCorreo());
+        resultadoMarcadores = mdb.ObtenMarcadoresPorUsuario(us.getCorreo());
     }
+    
     
     public String eliminarTemas(){
         TemaDAO tdb = new TemaDAO();
