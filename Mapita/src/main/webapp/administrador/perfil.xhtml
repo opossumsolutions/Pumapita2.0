@@ -122,6 +122,8 @@ and open the template in the editor.
                                                 <p:autoUpdate />
                                             </p:messages>
                                             <h:panelGrid columns="3" cellpadding="5">
+                                                <p:outputLabel for="nombre" value="Nombre:" />
+                                                <p:inputText class="texto" id="nombre" value="#{agregaUsuario.nombre}" required="true" placeholder="Nombre Usuario" autocomplete="off"/><br/>
                                                 <p:outputLabel for="correo" value="Correo:" />
                                                 <p:inputText class="texto" id="correo" value="#{agregaUsuario.correo}" required="true" placeholder="Correo" autocomplete="off" validatorMessage="Debe ser un correo valido"> 
                                                     <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />

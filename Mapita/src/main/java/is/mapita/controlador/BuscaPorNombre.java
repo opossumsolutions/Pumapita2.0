@@ -46,6 +46,9 @@ public class BuscaPorNombre {
             return "";
         UsuarioDAO ubd = new UsuarioDAO();
         resultado =  ubd.buscaPorNombre(nombre);
+        Usuario administrador = new Usuario();
+        administrador = ubd.buscaPorCorreo("adolfo@gmail.com");
+        resultado.remove(administrador);
         return "/resultado?faces-redirect=true";
     }
     

@@ -47,5 +47,6 @@ Contributor(s):
     <mapping resource="is/mapita/modelo/Usuario.hbm.xml"/>
     <mapping resource="is/mapita/modelo/Tema.hbm.xml"/>
     <mapping resource="is/mapita/modelo/Marcador.hbm.xml"/>
+    <mapping resource="is/mapita/modelo/Comentario.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

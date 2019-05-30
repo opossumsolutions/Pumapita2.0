@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-feb-2019 13:44:51 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="is.mapita.modelo.Comentario" table="comentario" schema="public" optimistic-lock="version">
+        <id name="idcomentario" type="int">
+            <column name="idcomentario" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="marcador" class="is.mapita.modelo.Marcador" fetch="select">
+            <column name="marcadorid" />
+        </many-to-one>
+        <many-to-one name="usuario" class="is.mapita.modelo.Usuario" fetch="select">
+            <column name="usuarioid" />
+        </many-to-one>
+        <property name="contenido" type="string">
+            <column name="contenido" not-null="true" />
+        </property>
+    </class>
+</h

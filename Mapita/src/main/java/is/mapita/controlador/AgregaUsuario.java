@@ -84,9 +84,6 @@ public class AgregaUsuario {
                 u.setRol(Rol.COMENTARISTA);
             }else if(usuario.equals("informador")){
                 SecureRandom random = new SecureRandom();
-                String random1 = new BigInteger(20, random).toString(32);
-                nombre="user"+random1;
-                u.setNombre(nombre);
                 String random2=new BigInteger(20, random).toString(32);
                 u.setContrasenia(random2);
                 u.setRol(Rol.INFORMADOR);

@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS comentario;
+
 DROP TABLE IF EXISTS marcador;
 
 DROP TABLE IF EXISTS tema;
@@ -29,6 +31,14 @@ CREATE TABLE marcador (
   latitud double precision NOT NULL,
   PRIMARY KEY (idmarcador),
   temaid integer REFERENCES tema(idtema) ON DELETE CASCADE
+);
+
+CREATE TABLE comentario (
+  idcomentario serial NOT NULL,
+  contenido text NOT NULL,
+  PRIMARY KEY (idcomentario),
+  usuarioid integer REFERENCES usuario(idusuario) ON DELETE CASCADE,
+  marcadorid integer REFERENCES marcador(idmarcador) ON DELETE CASCADE
 );
 
 INSERT INTO usuario(nombre,correo,contrasenia,fechanacimiento,rol)
