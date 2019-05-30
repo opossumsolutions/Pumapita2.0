@@ -5,6 +5,9 @@
  */
 package is.mapita.modelo;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * @author juan
@@ -17,6 +20,7 @@ public class Marcador  implements java.io.Serializable {
      private double longitud;
      private double latitud;
      private boolean selected;
+     private Set comentarios = new HashSet(0);
 
     public Marcador() {
     }
@@ -28,12 +32,13 @@ public class Marcador  implements java.io.Serializable {
         this.latitud = latitud;
     }
 
-    public Marcador(int idmarcador, Tema tema, String descripcion, double longitud, double latitud) {
+    public Marcador(int idmarcador, Tema tema, String descripcion, double longitud, double latitud,Set comentarios) {
         this.idmarcador = idmarcador;
         this.tema = tema;
         this.descripcion = descripcion;
         this.longitud = longitud;
         this.latitud = latitud;
+        this.comentarios = comentarios;
     }
 
     public int getIdmarcador() {
@@ -44,6 +49,14 @@ public class Marcador  implements java.io.Serializable {
         return selected;
     }
 
+    public Set getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(Set comentarios) {
+        this.comentarios = comentarios;
+    }
+    
     public void setSelected(boolean selected) {
         this.selected = selected;
     }

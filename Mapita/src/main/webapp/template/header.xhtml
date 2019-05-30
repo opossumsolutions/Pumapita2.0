@@ -20,13 +20,22 @@ and open the template in the editor.
                 </div>
                 <div class="ui-g-1"/>
                 <div class="ui-g-1"><h1>Mapita</h1></div>
-                <div class="ui-g-5"></div>
+                <div class="ui-g-2"/>
+                <div class="ui-g-3">
+                    <div class="ui-g-10">
+                        <h:form id="busquedaTema">
+                            <p:message for="searchtopic"/>
+                            <p:inputText type="search" id="searchtopic" value="#{buscaPorNombre.nombreTema}" required="true" requiredMessage="Busqueda Vacia"/>
+                            <p:commandButton action="#{buscaPorNombre.buscaPorNombreTema()}" update="busquedaTema" icon="ui-icon-search" value="Tema"/>          
+                        </h:form>
+                    </div>
+                </div>
                 <div class="ui-g-4">
                     <div class="ui-g-10">
                         <h:form id="busqueda">
                             <p:message for="search"/>
                             <p:inputText type="search" id="search" value="#{buscaPorNombre.nombre}" required="true" requiredMessage="Busqueda Vacia"/>
-                            <p:commandButton action="#{buscaPorNombre.buscaPorNombre()}" update="busqueda" icon="ui-icon-search"/>          
+                            <p:commandButton action="#{buscaPorNombre.buscaPorNombre()}" update="busqueda" icon="ui-icon-search" value="usuario"/>          
                         </h:form>
                     </div>
                     <div class="ui-g-1">

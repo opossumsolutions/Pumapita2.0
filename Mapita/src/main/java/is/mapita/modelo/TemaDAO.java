@@ -118,7 +118,27 @@ public class TemaDAO extends AbstractDAO<Tema>{
     
     }
     
-    
+    public List<Tema> buscaPorNombreTema(String nombre){
+        List<Tema> temas =null;
+        Session session = this.sessionFactory.openSession();
+        Transaction tx = null;
+        try{
+            tx = session.beginTransaction();
+            String hql = "From Tema t where t.nombre like concat('%',:nombre,'%')";
+            Query query = session.createQuery(hql);
+            query.setParameter("nombre", nombre);
+            temas = (List<Tema>)query.list();
+            tx.commit();
+        }catch(HibernateException e){
+            if(tx!=null){
+                tx.rollback();
+            }
+            e.printStackTrace();
+        }finally{
+            session.close();
+        }
+        return temas;
+    }
     
     public List<Tema> buscaPorUsuario(String correo){
         List<Tema> m = null;

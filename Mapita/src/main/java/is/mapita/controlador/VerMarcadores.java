@@ -43,7 +43,6 @@ public class VerMarcadores implements Serializable{
                 LatLng cord = new LatLng(m.getLatitud(),m.getLongitud());
                 Marker marcador = new Marker(cord,m.getTema().getNombre(),m.getDescripcion());
                 marcador.setIcon(m.getTema().getIcon());
-                //System.out.println(m.getIcon());
                 simpleModel.addOverlay(marcador);
             }
         }
@@ -56,6 +55,17 @@ public class VerMarcadores implements Serializable{
         Marcador marcador1 = mdb.buscaMarcadorPorLatLng(lat, lng);
         Marker marcador = new Marker(cord,marcador1.getTema().getNombre(),marcador1.getDescripcion());
         marcador.setIcon("../resources/images/"+marcador1.getTema().getColor()+".svg");
+        simpleModel.addOverlay(marcador);
+        return simpleModel;
+    }
+    
+    public MapModel verMarcadorBusqueda(double lat, double lng){
+        simpleModel = new DefaultMapModel();
+        LatLng cord = new LatLng(lat,lng);
+        MarcadorDAO mdb = new MarcadorDAO();
+        Marcador marcador1 = mdb.buscaMarcadorPorLatLng(lat, lng);
+        Marker marcador = new Marker(cord,marcador1.getTema().getNombre(),marcador1.getDescripcion());
+        marcador.setIcon(marcador1.getTema().getIcon());
         simpleModel.addOverlay(marcador);
         return simpleModel;
     }

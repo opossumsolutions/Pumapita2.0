@@ -42,4 +42,4 @@ CREATE TABLE comentario (
 );
 
 INSERT INTO usuario(nombre,correo,contrasenia,fechanacimiento,rol)
-       VALUES ('adolfo','adolfo@gmail.com','1234','1994-12-16','ADMINISTRADOR'),('ada','ada@gmail.com','1234','2018-08-04','INFORMADOR'),('juan','juan@gmail.com','1234','1994-12-16','COMENTARISTA')
+       VALUES ('administrador','admin@gmail.com','admin','1994-12-16','ADMINISTRADOR'),('adolfo','adolfo@gmail.com','1234','2018-08-04','INFORMADOR'),('martin','martin@gmail.com','1234','2018-08-04','INFORMADOR'),('isaias','isaias@gmail.com','1234','2018-08-04','INFORMADOR'),('juan','juan@gmail.com','1234','1994-12-16','COMENTARISTA')

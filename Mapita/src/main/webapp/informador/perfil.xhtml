@@ -137,7 +137,7 @@ and open the template in the editor.
                                     </p:messages>
                                     <div class="ui-g">
                                         <div class="ui-g-7">
-                                            <p:gmap  draggable="false"  mapTypeControl="false" center="23.382390, -102.291477" style="width:100%; height:400px"  zoom="5" type="HYBRID" id="mapa" model="#{agregaTema.simpleModel}" >
+                                            <p:gmap  draggable="false"  mapTypeControl="false" center="23.382390, -102.291477" style="width:100%; height:400px"  zoom="4" type="HYBRID" id="mapa" model="#{agregaTema.simpleModel}" >
                                                 <p:ajax event="pointSelect" listener="#{agregaTema.onPointSelect}" update="form3 mapa"/>
                                             </p:gmap>
                                         </div>
@@ -207,7 +207,7 @@ and open the template in the editor.
                                     </p:messages>
                                     <div class="ui-g">
                                         <div class="ui-g-7">
-                                            <p:gmap  draggable="false"  mapTypeControl="false" center="23.382390, -102.291477" style="width:100%; height:400px"  zoom="5" type="HYBRID" id="mapa" model="#{agregaTema.simpleModel}">
+                                            <p:gmap  draggable="false"  mapTypeControl="false" center="23.382390, -102.291477" style="width:100%; height:400px"  zoom="4" type="HYBRID" id="mapa" model="#{agregaTema.simpleModel}">
                                                 <p:ajax event="markerDrag" listener="#{agregaTema.onMarkerDrag}" update="form"/>
                                                 <p:ajax event="pointSelect" listener="#{agregaTema.onPointSelect}" update="form mapa"/>
                                             </p:gmap>
@@ -319,7 +319,13 @@ and open the template in the editor.
                                                     <h:outputText value="Descripcion:" />
                                                     <h:outputText value="#{marcador.descripcion}" style="font-weight: bold"/><br/>
                                                     <br/>
-                                                    <p:commandButton value="Eliminar" action="#{controladorMarcadores.eliminarMarcador(marcador.latitud, marcador.longitud)}" update="table"/><br/>
+                                                    <p:commandButton value="Eliminar" action="#{controladorMarcadores.eliminarMarcador(marcador.latitud, marcador.longitud)}" update="table">
+                                                    <p:confirm message="¿Seguro que quieres eliminar?" header="Aviso" icon="ui-icon-alert"/>
+                                                    </p:commandButton><br/>
+                                                    <p:confirmDialog global="true">
+                                                        <p:commandButton value="Si" type="button" icon="ui-icon-check" styleClass="ui-confirmdialog-yes"/>
+                                                        <p:commandButton value="No" type="button" icon="ui-icon-close" styleClass="ui-confirmdialog-no"/>
+                                                    </p:confirmDialog>
                                                 </center>
                                             </div>
                                             <div class="ui-g-8">
